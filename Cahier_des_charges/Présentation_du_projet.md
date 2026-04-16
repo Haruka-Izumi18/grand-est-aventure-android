@@ -4,12 +4,13 @@
 
  ## Objectif
 
- Les utilisateurs accèdent à des aventures proches de leur position actuelle, puis utilisent des codes QR pour résoudre des énigmes et progressent dans des quêtes. Ensuite consulter l'historique de des aventures et des badges acquis sur la page du compte.
+ Les utilisateurs accèdent à des aventures proches de leur position actuelle, puis résoudre des énigmes à des points géolocaliséset progressent dans des quêtes. Ensuite consulter l'historique de des aventures et des badges acquis sur la page du compte.
 
  ## Prérequis
  - Expo
  - Android studio
- - La base de données est déjà disponible sur la page d'admin.
+ - La base de données est déjà disponible sur la page d'admin.(Postgres, Prisma)
+ - carte Leaflet 
 
  ## Architecture
  - Page accuil
@@ -20,21 +21,24 @@
  ### Accueil
   - Carte(Départs des aventures)
   - Inscription/Login
-  - Lecteur de code QR
   - Menu vers les infomations(Liste des aventures, questions, contact)
 
  ### Aventure[id]
-  - Lecteur de code QR
-  - Liste des énigmes(Après términé l'aventure)
-  - Le badge(Après términé l'aventure)
+  - Carte(GPS)
+  - Liste des énigmes(Pouvoir les voir une fois que l'utilisateur l'aura résolu)
+  - Le badge(afficher après términé l'aventure)
+  - Formulaire de commentaire
 
  ### Liste des aventures
   - Explication d'application
   - Liste des aventures
 
  ### Page utilisateur
-  - Liste ses aventures
-  - Collection ses badges
+  - Sa liste d'aventures, Sa collection des badges
   - Modification d'information
 
-  
+## Liste des fonctions
+ - Inscription
+ - Connextion
+ - Déconnextion
+ - GPS pour obtenir la position actuelle et des énigmes
