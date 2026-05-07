@@ -3,7 +3,7 @@ import { expoClient } from "@better-auth/expo/client";
 import * as SecureStore from "expo-secure-store";
 
 export const authClient = createAuthClient({
-  baseURL: "https://baladindices.fr",
+  baseURL: "https://baladindices.fr/api/auth",
   plugins: [
     expoClient({
       scheme: "grandestaventure",
