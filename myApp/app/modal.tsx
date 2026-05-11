@@ -4,34 +4,28 @@ import { router } from "expo-router";
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { globalStyles } from '@/styles/global';
 
 export default function Modal() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Bienvenue</Text>
-
+    <View style={globalStyles.screen}>
+    <View style={globalStyles.container}>
+      <Text style={globalStyles.title}>Connecte-toi ou inscris-toi pour commencer des aventures</Text>
       <TouchableOpacity
-        style={styles.button}
+        style={globalStyles.button}
         onPress={() => router.replace("/sign-in")}
       >
-        <Text style={styles.buttonText}>Connexion</Text>
+        <Text style={globalStyles.buttonText}>Connexion</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.buttonWhite}
+        style={globalStyles.buttonWhite}
         onPress={() => router.replace("/sign-up")}
       >
-        <Text style={styles.buttonTextGreen}>Inscription</Text>
+        <Text style={globalStyles.buttonTextGreen}>Inscription</Text>
       </TouchableOpacity>
+    </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: "center", justifyContent: "center", gap: 16 },
-  title: { fontSize: 24, fontWeight: "bold", marginBottom: 24 },
-  button: { backgroundColor: "green", padding: 16, borderRadius: 12, width: 200, alignItems: "center" },
-  buttonText: { color: "white", fontSize: 18 },
-  buttonWhite: { borderWidth: 2, borderColor: "green", padding: 16, borderRadius: 12, width: 200, alignItems: "center" },
-  buttonTextGreen: { color: "green", fontSize: 18 },
-});

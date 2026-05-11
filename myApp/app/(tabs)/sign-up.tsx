@@ -2,6 +2,8 @@ import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { authClient } from "@/lib/auth-client";
 import { globalStyles } from '@/styles/global';
+import { router } from "expo-router";
+
 
 export default function SignUp() {
     const [email, setEmail] = useState("");
@@ -9,11 +11,16 @@ export default function SignUp() {
     const [password, setPassword] = useState("");
 
     const handleSubmit = async () => {
-        await authClient.signUp.email({
+        const { error } = await authClient.signUp.email({
                 email,
                 password,
                 name
         })
+        if (error) {
+          console.log("Error", error);
+        } else {
+          router.push('/');
+        }
     };
 
     return (
@@ -41,7 +48,7 @@ export default function SignUp() {
           onPress={() => {
             handleSubmit();
           }}
-          style={globalStyles.button}
+          style={[globalStyles.button, {marginTop: 20}]}
         >
           <Text style={globalStyles.buttonText}>Inscription</Text>
         </TouchableOpacity>

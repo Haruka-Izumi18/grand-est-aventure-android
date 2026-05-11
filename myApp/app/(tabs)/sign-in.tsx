@@ -1,8 +1,8 @@
 import { useState } from "react"; 
-import { View, Text, TextInput, TouchableOpacity, } from "react-native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { authClient } from "@/lib/auth-client";
 import { globalStyles } from '@/styles/global';
-
+import { router } from "expo-router";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
@@ -15,9 +15,10 @@ export default function SignIn() {
         })
         if (error) {
           console.log("Error", error);
+        } else {
+          router.push('/profil');
         }
     };
-
     return (
       <View style={globalStyles.screen}>
         <Text style={globalStyles.title}>Connecte-toi pour commencer l’aventure !</Text>
@@ -37,11 +38,12 @@ export default function SignIn() {
           onPress={() => {
             handleLogin();
           }}
-          style={globalStyles.button}
+          style={[globalStyles.button, {marginTop: 20}]}
         >
           <Text style={globalStyles.buttonText}>Connexion</Text>
         </TouchableOpacity>
       </View>
     );
 }
+
 

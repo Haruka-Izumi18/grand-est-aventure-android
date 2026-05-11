@@ -11,10 +11,9 @@ export default function TabLayout() {
       tabBar={(props) => (
         <View style={{ flexDirection: 'row', height: 60, backgroundColor: 'white', borderTopWidth: 1, borderTopColor: '#eee' }}>
           {props.state.routes
-            .filter((route) => ['index', 'liste-adventure', 'question', 'contact'].includes(route.name))
+            .filter((route) => ['liste-adventure', 'question', 'contact'].includes(route.name))
             .map((route) => {
               const icons: Record<string, string> = {
-                index: 'home',
                 'liste-adventure': 'map',
                 question: 'question',
                 contact: 'envelope',
@@ -40,7 +39,6 @@ export default function TabLayout() {
         </View>
       )}
     >
-      <Tabs.Screen name="index" />
       <Tabs.Screen name="liste-adventure" />
       <Tabs.Screen name="question" />
       <Tabs.Screen name="contact" />
@@ -52,6 +50,7 @@ export default function TabLayout() {
   name="sign-up"
   options={{ href: null }}
 />
+<Tabs.Screen name='profil' options={{ href: null }} />
     </Tabs>
   );
 }

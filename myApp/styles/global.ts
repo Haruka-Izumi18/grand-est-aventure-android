@@ -8,6 +8,13 @@ export const globalStyles = StyleSheet.create({
     paddingTop: 40,
     paddingHorizontal: 30,
   },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    gap: 16 ,
+  },
   input: {
     width: "100%",
     borderWidth: 1.5,
@@ -55,6 +62,13 @@ export const globalStyles = StyleSheet.create({
     color: COLORS.primary,
     fontSize: 24,
     fontWeight: "900",
+    textAlign: 'center',
+  },
+  titleGreen: {
+    fontFamily: FONT.regular,
+    color: COLORS.green,
+    fontSize: 20,
+    fontWeight: "800",
     textAlign: 'center',
   }
 });
