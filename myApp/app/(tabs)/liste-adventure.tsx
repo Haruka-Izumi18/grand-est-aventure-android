@@ -1,13 +1,13 @@
 import { useState } from "react"; 
-import { View, Text, TextInput, TouchableOpacity, } from "react-native";
+import { View, Text } from "react-native";
 import { globalStyles } from '@/styles/global';
 
-export default function question () {
+export default function listAdventure () {
 
     return(
         <View style={globalStyles.screen}>
         <Text>
-            Comment ça marche?
+            Liste des aventures
         </Text>
         </View>
     )
