@@ -35,24 +35,29 @@ export function ThemedText({
 
 const styles = StyleSheet.create({
   default: {
+    fontFamily: 'SpaceMono_700Bold',
     fontSize: 16,
     lineHeight: 24,
   },
   defaultSemiBold: {
+    fontFamily: 'SpaceMono_700Bold',
     fontSize: 16,
     lineHeight: 24,
     fontWeight: '600',
   },
   title: {
+    fontFamily: 'SpaceMono_700Bold',
     fontSize: 32,
     fontWeight: 'bold',
     lineHeight: 32,
   },
   subtitle: {
+    fontFamily: 'SpaceMono_700Bold',
     fontSize: 20,
     fontWeight: 'bold',
   },
   link: {
+    fontFamily: 'SpaceMono_700Bold',
     lineHeight: 30,
     fontSize: 16,
     color: '#0a7ea4',

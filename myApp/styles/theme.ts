@@ -4,3 +4,7 @@ export const COLORS = {
   green: '#68a618',
   white: '#ffff',
 };
+
+export const FONT = {
+  regular: 'SpaceMono_700Bold',
+}

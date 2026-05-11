@@ -1,45 +1,39 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack, router } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-import { authClient } from '@/lib/auth-client';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { useFonts, SpaceMono_400Regular, SpaceMono_700Bold } from '@expo-google-fonts/space-mono';
-import * as SplashScreen from 'expo-splash-screen';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Tabs } from 'expo-router';
 
-SplashScreen.preventAutoHideAsync();
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const { data: session, isPending } = authClient.useSession();
-  const [fontsLoaded] = useFonts({ SpaceMono_400Regular, SpaceMono_700Bold });
-
-  useEffect(() => {
-    if (fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded]);
-
-  useEffect(() => {
-    if (isPending) return;
-    if (!session) {
-      router.replace('/(auth)');
-    } else {
-      router.replace('/(tabs)');
-    }
-  }, [session, isPending]);
-
+export default function TabLayout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Tabs screenOptions={{ headerShown: false }}>
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: 'Home',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+      name="liste-adventure"
+      options={{
+        tabBarIcon: ({ color }) => <FontAwesome size={28} name='map' color={color} />
+      }}
+      />
+      <Tabs.Screen
+      name="question"
+      options={{
+        tabBarIcon: ({ color }) => <FontAwesome size={28} name='question' color={color} />
+      }}
+      />
+
+      
+   
+   
+
+      <Tabs.Screen
+        name="modal"
+        options={{
+          href: null,
+        }}
+      />
+    </Tabs>
   );
 }
