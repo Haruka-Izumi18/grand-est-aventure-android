@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from "react-native";
 import { authClient } from "@/lib/auth-client";
 import { globalStyles } from "@/styles/global";
@@ -28,6 +29,26 @@ export default function SignIn() {
       router.push("/profil");
     }
   };
+
+  const handleForgetPassword = async () => {
+    if (!email) {
+      Alert.alert("Error", "Veuillez saisir votre adresse e-mail.");
+      return;
+    }
+    const { error } = await authClient.requestPasswordReset({
+      email,
+      redirectTo: "https://baladindices.fr/reset-password",
+    });
+    if (error) {
+      Alert.alert("Erreur", error.message ?? "Impossible d'envoyer l'e-mail.");
+    } else {
+      Alert.alert(
+        "Email envoyé",
+        "Vérifie ta boîte mail pour réinitialiser ton mot de passe.",
+      );
+    }
+  };
+
   return (
     <View style={globalStyles.screen}>
       <Text style={globalStyles.title}>
@@ -43,7 +64,9 @@ export default function SignIn() {
           style={globalStyles.input}
           autoCapitalize="none"
         />
-        <Text style={[globalStyles.label, { marginTop: 20 }]}>Ton mot de passe?</Text>
+        <Text style={[globalStyles.label, { marginTop: 20 }]}>
+          Ton mot de passe?
+        </Text>
         <View style={styles.showInput}>
           <TextInput
             placeholder="Mot de passe"
@@ -65,6 +88,18 @@ export default function SignIn() {
             />
           </TouchableOpacity>
         </View>
+         <TouchableOpacity onPress={handleForgetPassword}>
+        <Text
+          style={{
+            color: "gray",
+            fontSize: 15,
+            fontWeight: "600",
+            textDecorationLine: "underline",
+          }}
+        >
+          Mot de passe oublié ?
+        </Text>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
             handleLogin();
