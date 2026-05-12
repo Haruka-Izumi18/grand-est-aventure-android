@@ -5,8 +5,9 @@ export const globalStyles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: COLORS.background,
-    paddingTop: 40,
+    paddingTop: 15,
     paddingHorizontal: 30,
+    gap: 5,
   },
   container: {
     flex: 1,
@@ -14,6 +15,12 @@ export const globalStyles = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     gap: 16 ,
+  },
+  label: {
+    fontFamily: FONT.regular,
+    color: COLORS.primary,
+    fontSize: 18,
+    fontWeight: "700",
   },
   input: {
     width: "100%",
@@ -64,11 +71,11 @@ export const globalStyles = StyleSheet.create({
     fontWeight: "900",
     textAlign: 'center',
   },
-  titleGreen: {
+  titleh2: {
     fontFamily: FONT.regular,
-    color: COLORS.green,
-    fontSize: 20,
-    fontWeight: "800",
+    color: COLORS.primary,
+    fontSize: 18,
+    fontWeight: "900",
     textAlign: 'center',
   }
 });

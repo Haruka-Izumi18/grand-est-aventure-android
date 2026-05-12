@@ -6,7 +6,6 @@ import { COLORS } from "@/styles/theme";
 export default function AuthLanding() {
   return (
     <View style={globalStyles.screen}>
-      
       <ImageBackground
       source={require("@/assets/images/Ville-Pres-Geo-1720509386955.webp")}
       style={styles.imgTop}
@@ -20,14 +19,14 @@ export default function AuthLanding() {
       </View>
       </ImageBackground>
       
-      <Text>Hello</Text>
+      <Text style={globalStyles.titleh2}>Quell aventure choisis-tu?</Text>
     </View>
   );
 }
 const styles = StyleSheet.create({
   imgTop:{
     width: "100%",
-    height: 150,
+    height: 130,
     justifyContent: "center",
   },
   sepiaOverlay: {

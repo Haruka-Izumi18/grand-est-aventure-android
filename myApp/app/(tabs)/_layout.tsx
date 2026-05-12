@@ -1,7 +1,6 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs, router } from 'expo-router';
 import { TouchableOpacity, View } from 'react-native';
-import { globalStyles } from "@/styles/global";
 import { COLORS } from '@/styles/theme';
 
 export default function TabLayout() {
@@ -14,8 +13,8 @@ export default function TabLayout() {
             .filter((route) => ['liste-adventure', 'question', 'contact'].includes(route.name))
             .map((route) => {
               const icons: Record<string, string> = {
-                'liste-adventure': 'map',
-                question: 'question',
+                'liste-adventure': 'compass',
+                question: 'question-circle-o',
                 contact: 'envelope',
               };
               const focusedRoute = props.state.routes[props.state.index];
@@ -26,7 +25,7 @@ export default function TabLayout() {
                 style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
                 onPress={() => props.navigation.navigate(route.name)}
               >
-                <FontAwesome size={28} name={icons[route.name] as any} color={isFocused ? 'blue' : COLORS.primary} />
+                <FontAwesome size={28} name={icons[route.name] as any} color={isFocused ? COLORS.green : COLORS.primary} />
               </TouchableOpacity>
             );
           })}

@@ -39,6 +39,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
     marginTop: 30,
     paddingHorizontal: 20,
+    paddingTop: 20,
+    gap: 5,
   },
   logo: { width: 70, height: 70 },
 })
