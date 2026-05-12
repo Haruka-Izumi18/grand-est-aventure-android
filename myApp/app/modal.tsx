@@ -1,9 +1,6 @@
 import { Link } from 'expo-router';
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { router } from "expo-router";
-
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
 import { globalStyles } from '@/styles/global';
 
 export default function Modal() {
@@ -25,7 +22,18 @@ export default function Modal() {
         <Text style={globalStyles.buttonTextGreen}>Inscription</Text>
       </TouchableOpacity>
     </View>
+  
+    <Text style={styles.footer}>Propulsé par 🚀 <Link aria-label='Loluweb' href='https://baladindices.fr/'>Loluweb·&#169;</Link> 2026 {"\n"}
+     Tous droits réservés</Text>
     </View>
   );
 }
-
+const styles = StyleSheet.create ({
+footer: {
+  position: "absolute",
+  width:'100%',
+  bottom: 30,
+  alignSelf: "center",
+  textAlign: "center",
+}
+})

@@ -3,6 +3,7 @@ import {
   View,
   Text,
   TextInput,
+  Image,
   TouchableOpacity,
   StyleSheet,
   Alert,
@@ -10,6 +11,8 @@ import {
 import { authClient } from "@/lib/auth-client";
 import { globalStyles } from "@/styles/global";
 import { router } from "expo-router";
+import * as WebBrowser from 'expo-web-browser';
+import { useEffect } from 'react';
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { COLORS } from "@/styles/theme";
 
@@ -17,6 +20,14 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    WebBrowser.warmUpAsync();
+    return () => {
+      WebBrowser.coolDownAsync();
+    };
+  }, []);
 
   const handleLogin = async () => {
     const { error } = await authClient.signIn.email({
@@ -46,6 +57,42 @@ export default function SignIn() {
         "Email envoyé",
         "Vérifie ta boîte mail pour réinitialiser ton mot de passe.",
       );
+    }
+  };
+
+  const handleGoogleLogin = async() => {
+    setLoading(true);
+    const { error } = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/profil",
+    });
+    setLoading(false);
+    if(error) {
+      Alert.alert("Erreur", error.message ?? "Impossible de se connecter avec Google.")
+    }
+  };
+
+  const handleFacebookLogin = async() => {
+    setLoading(true);
+    const { error } = await authClient.signIn.social({
+      provider: "facebook",
+      callbackURL: "/profil",
+    });
+    setLoading(false);
+    if(error) {
+      Alert.alert("Erreur", error.message ?? "Impossible de se connecter avec Facebook.")
+    }
+  };
+
+  const handleDiscordLogin = async() => {
+    setLoading(true);
+    const { error } = await authClient.signIn.social({
+      provider: "discord",
+      callbackURL: "/profil",
+    });
+    setLoading(false);
+    if(error) {
+      Alert.alert("Erreur", error.message ?? "Impossible de se connecter avec Discord.")
     }
   };
 
@@ -108,6 +155,45 @@ export default function SignIn() {
         >
           <Text style={globalStyles.buttonText}>Connexion</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+                style={[styles.googleButton, { marginTop: 20 }]}
+                onPress={handleGoogleLogin}
+                disabled={loading}
+            >
+                <Image
+                        source={require("@/assets/images/chercher.png")}
+                        style={styles.socialIcon}
+                        resizeMode="contain"
+                    />
+                <Text style={styles.googleButtonText}>Se connecter avec Google</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={[styles.facebookButton, { marginTop: 20 }]}
+                onPress={handleFacebookLogin}
+                disabled={loading}
+            >
+                <Image
+                        source={require("@/assets/images/facebook(2).png")}
+                        style={styles.facebookIcon}
+                        resizeMode="contain"
+                    />
+                <Text style={styles.socialButtonText}>Se connecter avec Facebook</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={[styles.discordButton, { marginTop: 20 }]}
+                onPress={handleDiscordLogin}
+                disabled={loading}
+            >
+                <Image
+                        source={require("@/assets/images/discorde.png")}
+                        style={styles.socialIcon}
+                        resizeMode="contain"
+                    />
+                <Text style={styles.socialButtonText}>Se connecter avec Discord</Text>
+            </TouchableOpacity>
       </View>
     </View>
   );
@@ -136,4 +222,62 @@ const styles = StyleSheet.create({
     top: "50%",
     transform: [{ translateY: -10 }],
   },
+  googleButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 12,
+        width: '100%',
+        paddingVertical: 12,
+        paddingHorizontal: 12,
+        borderRadius: 12,
+        borderWidth: 1.5,
+        borderColor: '#ddd',
+        backgroundColor: 'white',
+    },
+    googleButtonText: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#333',
+    },
+     socialIcon: {
+      width: 25,
+      height: 25,
+    },
+    facebookButton: {
+      flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 12,
+        width: '100%',
+        paddingVertical: 12,
+        paddingHorizontal: 12,
+        borderRadius: 12,
+        borderWidth: 1.5,
+        borderColor: '#ddd',
+        backgroundColor: 'blue',
+    },
+    socialButtonText: {
+      fontSize: 16,
+        fontWeight: '600',
+        color: 'white',
+    },
+    facebookIcon: {
+      width: 25,
+      height: 25,
+      color: "white"
+    },
+    discordButton: {
+      flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 12,
+        width: '100%',
+        paddingVertical: 12,
+        paddingHorizontal: 12,
+        borderRadius: 12,
+        borderWidth: 1.5,
+        borderColor: '#ddd',
+        backgroundColor: 'violet',
+    },
 });
