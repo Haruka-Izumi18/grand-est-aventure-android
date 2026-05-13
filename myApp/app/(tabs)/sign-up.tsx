@@ -14,6 +14,7 @@ import { router } from "expo-router";
 import * as WebBrowser from 'expo-web-browser';
 import { useEffect } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { COLORS } from "@/styles/theme";
 
 export default function SignUp() {
@@ -111,7 +112,7 @@ const handleDiscordSignUp = async () => {
         style={globalStyles.input}
         autoCapitalize="none"
       />
-      <Text style={[globalStyles.label, { marginTop: 20 }]}>Mot de passe?</Text>
+      <Text style={[globalStyles.label, { marginTop: 15 }]}>Mot de passe?</Text>
       <View style={styles.showInput}>
       <TextInput
         placeholder="Mot de Passe"
@@ -129,7 +130,7 @@ const handleDiscordSignUp = async () => {
     <FontAwesome name={showPassword ? "eye" : "eye-slash"} size={20} color="gray" />
   </TouchableOpacity>
       </View>
-      <Text style={[globalStyles.label, { marginTop: 20 }]}>Confirme le mot de passe?</Text>
+      <Text style={[globalStyles.label, { marginTop: 15 }]}>Confirme le mot de passe?</Text>
       <View style={styles.showInput}>
       <TextInput
         placeholder="Confirme le mot de passe"
@@ -152,13 +153,13 @@ const handleDiscordSignUp = async () => {
         onPress={() => {
           handleSubmit();
         }}
-        style={[globalStyles.button, { marginTop: 20 }]}
+        style={[globalStyles.button, { marginTop: 15 }]}
       >
         <Text style={globalStyles.buttonText}>Inscription</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-    style={[styles.googleButton, {marginTop: 20}]}
+    style={[styles.googleButton, {marginTop: 15}]}
     onPress={handleGoogleSignUp}
     disabled={loading}
 >
@@ -171,28 +172,20 @@ const handleDiscordSignUp = async () => {
 </TouchableOpacity>
 
 <TouchableOpacity
-    style={[styles.facebookButton, {marginTop: 20}]}
+    style={[styles.facebookButton, {marginTop: 5}]}
     onPress={handleFacebookSignUp}
     disabled={loading}
 >
-    <Image
-        source={require("@/assets/images/facebook(2).png")}
-        style={styles.facebookIcon}
-        resizeMode="contain"
-    />
+<FontAwesome name="facebook-f" size={24} color="white" />
     <Text style={styles.socialButtonText}>S&apos;inscrire avec Facebook</Text>
 </TouchableOpacity>
 
 <TouchableOpacity
-    style={[styles.discordButton, {marginTop: 20}]}
+    style={[styles.discordButton, {marginTop: 5}]}
     onPress={handleDiscordSignUp}
     disabled={loading}
 >
-    <Image
-        source={require("@/assets/images/discorde.png")}
-        style={styles.socialIcon}
-        resizeMode="contain"
-    />
+  <FontAwesome6 name="discord" size={24} color="white" />
     <Text style={styles.socialButtonText}>S&apos;inscrire avec Discord</Text>
 </TouchableOpacity>
     </View>
@@ -241,8 +234,8 @@ const styles = StyleSheet.create({
         color: '#333',
     },
     socialIcon: {
-      width: 25,
-      height: 25,
+      width: 24,
+      height: 24,
     },
     facebookButton: {
       flexDirection: 'row',
@@ -253,19 +246,12 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 12,
         borderRadius: 12,
-        borderWidth: 1.5,
-        borderColor: '#ddd',
-        backgroundColor: 'blue',
+        backgroundColor: '#1877f2',
     },
     socialButtonText: {
       fontSize: 16,
         fontWeight: '600',
         color: 'white',
-    },
-    facebookIcon: {
-      width: 25,
-      height: 25,
-      color: "white"
     },
     discordButton: {
       flexDirection: 'row',
@@ -276,9 +262,7 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 12,
         borderRadius: 12,
-        borderWidth: 1.5,
-        borderColor: '#ddd',
-        backgroundColor: 'violet',
+        backgroundColor: '#5865f2',
     },
     
 });

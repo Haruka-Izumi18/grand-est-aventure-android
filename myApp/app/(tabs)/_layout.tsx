@@ -18,7 +18,7 @@ export default function TabLayout() {
               const icons: Record<string, string> = {
                 'liste-adventure': 'compass',
                 question: 'question-circle-o',
-                contact: 'envelope',
+                contact: 'envelope-o',
               };
               const focusedRoute = props.state.routes[props.state.index];
               const isFocused = focusedRoute.name === route.name;

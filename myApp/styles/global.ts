@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONT } from './theme';
+import { COLORS, FONT, FONT_SIZE } from './theme';
 
 export const globalStyles = StyleSheet.create({
   screen: {
@@ -19,7 +19,7 @@ export const globalStyles = StyleSheet.create({
   label: {
     fontFamily: FONT.regular,
     color: COLORS.primary,
-    fontSize: 18,
+    fontSize: FONT_SIZE.lg,
     fontWeight: "700",
   },
   input: {
@@ -28,10 +28,10 @@ export const globalStyles = StyleSheet.create({
     borderColor: COLORS.primary,
     borderRadius: 12,
     backgroundColor: COLORS.white,
-    paddingVertical: 12,
-    paddingHorizontal: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
     fontFamily: 'SpaceMono_700Bold',
-    fontSize: 16,
+    fontSize: FONT_SIZE.sm,
     color: COLORS.primary,
     marginTop: 12,
   },
@@ -45,7 +45,7 @@ export const globalStyles = StyleSheet.create({
   buttonText: {
     fontFamily: FONT.regular,
     color: COLORS.white,
-    fontSize: 18,
+    fontSize: FONT_SIZE.lg,
     fontWeight: "700",
   },
   buttonWhite: {
@@ -61,21 +61,27 @@ export const globalStyles = StyleSheet.create({
   buttonTextGreen: {
     fontFamily: FONT.regular,
     color: COLORS.green,
-    fontSize: 18,
+    fontSize: FONT_SIZE.lg,
     fontWeight: "700",
   },
   title: {
     fontFamily: FONT.regular,
     color: COLORS.primary,
-    fontSize: 24,
+    fontSize: FONT_SIZE.title,
     fontWeight: "900",
     textAlign: 'center',
   },
   titleh2: {
     fontFamily: FONT.regular,
     color: COLORS.primary,
-    fontSize: 18,
+    fontSize: FONT_SIZE.lg,
     fontWeight: "900",
     textAlign: 'center',
+  },
+  titleGreen: {
+    fontFamily: FONT.regular,
+    color: COLORS.green,
+    fontSize: FONT_SIZE.xl,
+    fontWeight: "900",
   }
 });
