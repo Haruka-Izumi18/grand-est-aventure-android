@@ -45,9 +45,19 @@ export default function profil() {
       </View>
       <View style={styles.card}>
          <Text style={globalStyles.titleGreen}>Histoire des aventures</Text>
+          {user?.adventureStepValidations ? (
+  <Text>{user.adventureStepValidations}</Text>
+) : (
+  <Text>Tu n&apos;as pas encore fini d&apos;aventure</Text>
+)}
       </View>
       <View style={styles.card}>
          <Text style={globalStyles.titleGreen}>Collection des badges</Text>
+         {user?.userBadges ? (
+  <Text>{user.userBadges}</Text>
+) : (
+  <Text>Tu n&apos;as pas encore gagné de badge</Text>
+)}
       </View>
     </View>
   );
