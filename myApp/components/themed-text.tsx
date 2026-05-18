@@ -1,6 +1,6 @@
 import { StyleSheet, Text, type TextProps } from 'react-native';
-
 import { useThemeColor } from '@/hooks/use-theme-color';
+
 
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
@@ -36,7 +36,7 @@ export function ThemedText({
 const styles = StyleSheet.create({
   default: {
     fontFamily: 'SpaceMono_700Bold',
-    fontSize: 16,
+    fontSize: 50,
     lineHeight: 24,
   },
   defaultSemiBold: {

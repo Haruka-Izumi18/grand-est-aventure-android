@@ -3,8 +3,23 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { router } from "expo-router";
 import { globalStyles } from '@/styles/global';
 import { COLORS } from '@/styles/theme';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react';
+
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+
+    const [loaded]= useFonts({
+        'SpaceMono_700Bold': require('../assets/fonts/SpaceMono-Bold.ttf')
+    })
+
+    useEffect(() => {
+    if (loaded) SplashScreen.hideAsync();
+  }, [loaded]);
+
+  if (!loaded) return null;
   return (
     <Stack
     screenOptions={{
@@ -33,6 +48,7 @@ export default function RootLayout() {
 
 const styles = StyleSheet.create({
   container: {
+    fontFamily: 'SpaceMono',
     flexDirection: "row",
     alignItems: 'center',
     width: '100%',
