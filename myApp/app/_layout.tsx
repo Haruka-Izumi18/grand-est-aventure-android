@@ -11,15 +11,16 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
 
-    const [loaded]= useFonts({
-        'SpaceMono_700Bold': require('../assets/fonts/SpaceMono-Bold.ttf')
-    })
+    const [loaded, error] = useFonts({
+        SpaceMono_700Bold: require('../assets/fonts/SpaceMono-Bold.ttf'),
+        'PlaywriteMXGuides-Regular': require('../assets/fonts/PlaywriteMXGuides-Regular.ttf'),
+    });
 
     useEffect(() => {
-    if (loaded) SplashScreen.hideAsync();
-  }, [loaded]);
+        if (loaded || error) SplashScreen.hideAsync();
+    }, [loaded, error]);
 
-  if (!loaded) return null;
+    if (!loaded && !error) return null;
   return (
     <Stack
     screenOptions={{

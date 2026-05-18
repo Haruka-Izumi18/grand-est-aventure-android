@@ -7,7 +7,8 @@ export const COLORS = {
 
 export const FONT = {
   regular: 'SpaceMono_700Bold',
-}
+  playwrite: 'PlaywriteMXGuides-Regular',
+};
 
 export const FONT_SIZE = {
   xs: 12,

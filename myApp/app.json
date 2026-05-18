@@ -43,24 +43,9 @@
     "expo-font",
     {
       "fonts": [
-        "./assets/fonts/PlaywriteMXGuides-Regular.ttf"
-      ],
-      "android": {
-        "fonts": [
-          {
-            "fontFamily": "PlayWrite",
-            "fontDefinitions": [
-              {
-                "path": "./assets/fonts/PlaywriteMXGuides-Regular.ttf",
-                "weight": 700
-              }
-            ]
-          }
-        ]
-      },
-      "ios": {
-        "fonts": ["./assets/fonts/PlaywriteMXGuides-Regular.ttf"]
-      }
+        "./assets/fonts/PlaywriteMXGuides-Regular.ttf",
+        "./assets/fonts/SpaceMono-Bold.ttf"
+      ]
     }
   ],
   "expo-web-browser"

@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { globalStyles } from "@/styles/global";
 import { authClient } from "@/lib/auth-client";
 import { router } from "expo-router";
-import { COLORS, FONT_SIZE } from "@/styles/theme";
+import { COLORS, FONT, FONT_SIZE } from "@/styles/theme";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { ThemedText } from "@/components/themed-text";
@@ -28,7 +28,7 @@ export default function profil() {
                     {user?.city ? (
                         <Text>{user.city}</Text>
                     ) : (
-                        <Text style={{fontFamily: "PlaywriteMXGuides-Regular",color: "red"}}>Ta ville non renseignée...</Text>
+                        <Text style={{ fontFamily: FONT.playwrite, color: "red" }}>Ta ville non renseignée...</Text>
                     )}
                 </View>
                 <View style={{ flexDirection: "row", gap: 5 }}>
