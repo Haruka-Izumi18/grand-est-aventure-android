@@ -6,8 +6,10 @@ export const COLORS = {
 };
 
 export const FONT = {
-  regular: 'SpaceMono_700Bold',
-  playwrite: 'PlaywriteMXGuides-Regular',
+  regular: 'SpaceMono_Regular',
+  bold: 'SpaceMono_Bold',
+  boldItalic: 'SpaceMono_BoldItalic',
+  italic: 'SpaceMono_Italic',
 };
 
 export const FONT_SIZE = {

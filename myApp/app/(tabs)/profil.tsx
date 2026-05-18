@@ -26,17 +26,17 @@ export default function profil() {
                 <View style={{ flexDirection: "row", gap: 5 }}>
                     <FontAwesome6 name="location-dot" size={16} color={COLORS.primary} />
                     {user?.city ? (
-                        <Text>{user.city}</Text>
+                        <Text style={{ fontFamily: FONT.regular}}>{user.city}</Text>
                     ) : (
-                        <Text style={{ fontFamily: FONT.playwrite, color: "red" }}>Ta ville non renseignée...</Text>
+                        <Text style={{ fontFamily: FONT.regular }} >Ta ville non renseignée...</Text>
                     )}
                 </View>
                 <View style={{ flexDirection: "row", gap: 5 }}>
                     <FontAwesome name="envelope-o" size={16} color={COLORS.primary} />
                     {user?.email ?
-                        <Text>{user.email}</Text>
+                        <Text style={{ fontFamily: FONT.regular}}>{user.email}</Text>
                         :
-                        <Text>Ton email n&apos;est pas renseignée...</Text>
+                        <Text style={{ fontFamily: FONT.regular}}>Ton email n&apos;est pas renseignée...</Text>
                     }
                 </View>
                 <TouchableOpacity style={[globalStyles.button, { alignSelf: "flex-end", }]}>
@@ -49,17 +49,17 @@ export default function profil() {
             <View style={styles.card}>
                 <Text style={globalStyles.titleGreen}>Histoire des aventures</Text>
                 {user?.adventureStepValidations ? (
-                    <Text>{user.adventureStepValidations}</Text>
+                    <Text style={{ fontFamily: FONT.regular}}>{user.adventureStepValidations}</Text>
                 ) : (
-                    <Text>Tu n&apos;as pas encore fini d&apos;aventure</Text>
+                    <Text style={{ fontFamily: FONT.regular}}>Tu n&apos;as pas encore fini d&apos;aventure</Text>
                 )}
             </View>
             <View style={styles.card}>
                 <Text style={globalStyles.titleGreen}>Collection des badges</Text>
                 {user?.userBadges ? (
-                    <Text>{user.userBadges}</Text>
+                    <Text style={{ fontFamily: FONT.regular}}>{user.userBadges}</Text>
                 ) : (
-                    <Text>Tu n&apos;as pas encore gagné de badge</Text>
+                    <Text style={{ fontFamily: FONT.regular}}>Tu n&apos;as pas encore gagné de badge</Text>
                 )}
             </View>
         </View>
