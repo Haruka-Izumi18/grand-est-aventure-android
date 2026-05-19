@@ -1,5 +1,4 @@
-import { View, Text, Image, ImageBackground,  StyleSheet } from "react-native";
-import { router } from "expo-router";
+import { View, Text, ImageBackground,  StyleSheet } from "react-native";
 import { globalStyles } from "@/styles/global";
 import { COLORS } from "@/styles/theme";
 
@@ -19,7 +18,7 @@ export default function AuthLanding() {
       </View>
       </ImageBackground>
       
-      <Text style={globalStyles.titleh2}>Quell aventure choisis-tu?</Text>
+      <Text style={globalStyles.titleh2}>Quelle aventure choisis-tu?</Text>
     </View>
   );
 }
