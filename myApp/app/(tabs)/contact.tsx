@@ -173,14 +173,14 @@ export default function ContactScreen(){
       </ImageBackground>
 
       <View style={globalStyles.card}>
-        <Text style={[globalStyles.titleGreen]}>
+        <Text style={[globalStyles.titleGreen ]}>
           Ton nom
         </Text>
         <TextInput
           value={name}
           onChangeText={(v) => 
             setState((prevState) => ({ ...prevState, name: v, nameError:""}))}
-            style={[globalStyles.input, nameError ? styles.inputError : null]}
+            style={[globalStyles.input, { marginTop:0, marginBottom:10 }, nameError ? styles.inputError : null]}
           placeholder="Jean Dupont"
         />
         {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
@@ -194,7 +194,7 @@ export default function ContactScreen(){
           value={email}
           onChangeText={(v) =>
             setState((prevState) => ({ ...prevState, email: v, emailError:""}))}
-            style={[globalStyles.input, emailError ? styles.inputError : null]}
+            style={[globalStyles.input, { marginTop:0, marginBottom:10 }, emailError ? styles.inputError : null]}
             placeholder="jean@exemple.com"
             autoCapitalize="none"
             keyboardType="email-address"
@@ -210,7 +210,7 @@ export default function ContactScreen(){
           value={message}
           onChangeText={(v) =>
             setState((prevState) => ({ ...prevState, message: v, messageError:""}))}
-            style={[globalStyles.input, styles.textArea, messageError ? styles.inputError : null]}
+            style={[globalStyles.input, { marginTop:0, marginBottom:10 }, styles.textArea, messageError ? styles.inputError : null]}
             placeholder="Ton message..."
             multiline
             numberOfLines={4}
