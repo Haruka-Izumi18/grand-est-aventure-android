@@ -6,11 +6,15 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import { authClient } from "@/lib/auth-client";
+
 
 SplashScreen.preventAutoHideAsync();
 
 
 export default function RootLayout() {
+      const { data: session } = authClient.useSession();
+      const user = session?.user;
 
     const [loaded, error] = useFonts({
         SpaceMono_Regular: require('../assets/fonts/SpaceMono-Regular.ttf'),
@@ -26,20 +30,15 @@ export default function RootLayout() {
     if (!loaded && !error) return null;
   return (
     <>
-     <StatusBar translucent backgroundColor='transparent' style='dark' />
+    <StatusBar translucent backgroundColor='transparent' style='dark' />
     <Stack
     screenOptions={{
       headerShown: true,
       header: () => (
         <View style={styles.container}>
-          <TouchableOpacity onPress={() => router.push('/')}>
-            <Image
-              source={require("@/assets/images/logo.png")}
-              style={styles.logo}
-              resizeMode="contain"
-            />
-            </TouchableOpacity>
-            <Text style={globalStyles.title}>Balad&apos;indice</Text>
+          {user?.name && (
+          <Text style={{textAlign: "right"}}>{user.name}</Text>
+            )}
             </View>
       ),
     }}
@@ -53,9 +52,6 @@ export default function RootLayout() {
 
 const styles = StyleSheet.create({
   container: {
-    fontFamily: 'SpaceMono',
-    flexDirection: "row",
-    alignItems: 'center',
     width: '100%',
     backgroundColor: COLORS.background,
     paddingHorizontal: 20,

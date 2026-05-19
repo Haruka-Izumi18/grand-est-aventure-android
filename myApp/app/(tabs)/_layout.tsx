@@ -10,6 +10,7 @@ export default function TabLayout() {
   const insets = useSafeAreaInsets();
 
   const tabConfig = [
+    { name: "index", icon: "home"},
     { name: "liste-adventure", icon: "compass" },
     { name: "question", icon: "question-circle-o" },
     { name: "contact", icon: "envelope-o" },
@@ -30,7 +31,7 @@ export default function TabLayout() {
             flexDirection: "row",
             height: 60 + insets.bottom,
             paddingBottom: insets.bottom,
-            backgroundColor: COLORS.white, // ← 文字列 "COLORS.white" を修正
+            backgroundColor: COLORS.white,
             borderTopWidth: 1,
             borderTopColor: "#eee",
           }}
@@ -64,7 +65,7 @@ export default function TabLayout() {
         </View>
       )}
     >
-      <Tabs.Screen name="index" options={{ href: null }} />
+      <Tabs.Screen name="index" />
       <Tabs.Screen name="liste-adventure" />
       <Tabs.Screen name="question" />
       <Tabs.Screen name="contact" />
