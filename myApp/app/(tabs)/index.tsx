@@ -1,6 +1,5 @@
 import { View, Text, ImageBackground,  StyleSheet } from "react-native";
 import { globalStyles } from "@/styles/global";
-import { COLORS } from "@/styles/theme";
 
 export default function AuthLanding() {
   return (
@@ -14,7 +13,7 @@ export default function AuthLanding() {
       <View style={styles.sepiaOverlay} />
       <View style={globalStyles.container}>
       <Text style={styles.secondTitle}>NOUVEAU GRAND EST</Text>
-      <Text style={styles.textTop}>La ville devient{"\n"}une chasse au trésor</Text>
+      <Text style={[globalStyles.bannerTitle,{textAlign: "center"} ]}>La ville devient{"\n"}une chasse au trésor</Text>
       </View>
       </ImageBackground>
       
@@ -40,13 +39,5 @@ const styles = StyleSheet.create({
      textShadowColor: 'rgba(233, 238, 231, 0.5)',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 4,
-  },
-  textTop: {
-    color: COLORS.white,
-    fontSize: 24,
-    fontWeight: "900",
-    textAlign: "center",
   }
-
-
 });

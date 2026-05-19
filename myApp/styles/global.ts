@@ -96,5 +96,10 @@ export const globalStyles = StyleSheet.create({
         fontSize: FONT_SIZE.md,
         fontWeight: "700",
         paddingHorizontal: 8,
-    }
+    },
+    bannerTitle: {
+    color: COLORS.white,
+    fontFamily: FONT.bold,
+    fontSize: FONT_SIZE.title
+  },
 });
