@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { router,  Stack } from "expo-router";
 import { globalStyles } from '@/styles/global';
 import { COLORS } from '@/styles/theme';
@@ -44,7 +44,6 @@ export default function RootLayout() {
     }}
     >
       <Stack.Screen name='(tabs)' />
-    
     </Stack>
     </>
   );
