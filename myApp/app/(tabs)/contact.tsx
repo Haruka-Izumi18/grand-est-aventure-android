@@ -5,6 +5,7 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
+  ImageBackground,
   StyleSheet,
 } from "react-native";
 import { globalStyles } from "@/styles/global";
@@ -21,18 +22,18 @@ export default function Contact() {
 
   return (
     <ScrollView style={globalStyles.screen}>
-      <Text
-        style={{
-          fontFamily: FONT.regular,
-          fontSize: FONT_SIZE.title,
-          color: COLORS.primary,
-        }}
+      <ImageBackground
+        source={require("@/assets/images/Contact.webp")}
+        style={styles.banner}
+        resizeMode="cover"
       >
-        Contacte nous
-      </Text>
+        <Text style={styles.bannerTitle}>
+          Contacte nous
+        </Text>
+      </ImageBackground>
 
       <View style={styles.card}>
-        <Text style={styles.label}>Ton nom</Text>
+        <Text style={[globalStyles.label, { color: COLORS.green }]}>Ton nom</Text>
         <TextInput
           value={nom}
           onChangeText={setNom}
@@ -40,7 +41,7 @@ export default function Contact() {
           placeholder="Jean Dupont"
         />
 
-        <Text style={[styles.label, { marginTop: 12 }]}>Adresse e-mail</Text>
+        <Text style={[globalStyles.label, { color: COLORS.green, marginTop: 12 }]}>Adresse e-mail</Text>
         <TextInput
           value={email}
           onChangeText={setEmail}
@@ -50,7 +51,7 @@ export default function Contact() {
           keyboardType="email-address"
         />
 
-        <Text style={[styles.label, { marginTop: 12 }]}>Message</Text>
+        <Text style={[globalStyles.label, { color: COLORS.green, marginTop: 12 }]}>Message</Text>
         <TextInput
           value={message}
           onChangeText={setMessage}
@@ -73,6 +74,14 @@ export default function Contact() {
 }
 
 const styles = StyleSheet.create({
+  banner: {
+    height: 150,
+    marginHorizontal: -30,
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+    marginBottom: 4,
+  },
   card: {
     borderWidth: 1.5,
     borderColor: COLORS.green,
@@ -81,11 +90,10 @@ const styles = StyleSheet.create({
     marginTop: 24,
     gap: 4,
   },
-  label: {
+  bannerTitle: {
     fontFamily: FONT.regular,
-    color: COLORS.green,
-    fontSize: FONT_SIZE.sm,
-    fontWeight: "700",
+    fontSize: FONT_SIZE.title,
+    color: COLORS.white,
   },
   textArea: {
     height: 120,
