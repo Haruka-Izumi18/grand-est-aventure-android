@@ -111,11 +111,11 @@ export default function Contact() {
         style={styles.banner}
         resizeMode="cover"
       >
-        <Text style={styles.bannerTitle}>Contacte nous</Text>
+        <Text style={globalStyles.bannerTitle}>Contacte nous</Text>
       </ImageBackground>
 
-      <View style={styles.card}>
-        <Text style={[globalStyles.label, { color: COLORS.green }]}>
+      <View style={globalStyles.card}>
+        <Text style={[globalStyles.titleGreen]}>
           Ton nom
         </Text>
         <TextInput
@@ -127,7 +127,7 @@ export default function Contact() {
         {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
 
         <Text
-          style={[globalStyles.label, { color: COLORS.green, marginTop: 12 }]}
+          style={[globalStyles.titleGreen]}
         >
           Adresse e-mail
         </Text>
@@ -142,7 +142,7 @@ export default function Contact() {
         {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
 
         <Text
-          style={[globalStyles.label, { color: COLORS.green, marginTop: 12 }]}
+          style={[globalStyles.titleGreen]}
         >
           Message
         </Text>
@@ -187,19 +187,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     overflow: "hidden",
     marginBottom: 4,
-  },
-  card: {
-    borderWidth: 1.5,
-    borderColor: COLORS.green,
-    borderRadius: 16,
-    padding: 16,
-    marginTop: 16,
-    gap: 4,
-  },
-  bannerTitle: {
-    fontFamily: FONT.regular,
-    fontSize: FONT_SIZE.title,
-    color: COLORS.white,
   },
   inputError: {
     borderColor: "#e53935",
