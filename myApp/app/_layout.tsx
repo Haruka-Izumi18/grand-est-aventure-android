@@ -1,13 +1,14 @@
-import { Stack } from 'expo-router';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { router } from "expo-router";
+import { router,  Stack } from "expo-router";
 import { globalStyles } from '@/styles/global';
 import { COLORS } from '@/styles/theme';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { StatusBar } from 'expo-status-bar';
 
 SplashScreen.preventAutoHideAsync();
+
 
 export default function RootLayout() {
 
@@ -24,6 +25,8 @@ export default function RootLayout() {
 
     if (!loaded && !error) return null;
   return (
+    <>
+     <StatusBar translucent backgroundColor='transparent' style='dark' />
     <Stack
     screenOptions={{
       headerShown: true,
@@ -46,6 +49,7 @@ export default function RootLayout() {
       name="modal" options={{ presentation: "modal" }}
        />
     </Stack>
+    </>
   );
 }
 
@@ -56,9 +60,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     backgroundColor: COLORS.background,
-    marginTop: 30,
     paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingTop: 40,
     gap: 5,
   },
   logo: { width: 70, height: 70 },
