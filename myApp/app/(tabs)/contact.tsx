@@ -58,6 +58,7 @@ export default function Contact() {
       setName('');
       setEmail('');
       setMessage('');
+      setTimeout(() => setStatus("idle"), 3000);
     } else {
       setStatus("idle");
       Alert.alert("Erreur", "Le serveur Discord a renvoyé une erreur.");
