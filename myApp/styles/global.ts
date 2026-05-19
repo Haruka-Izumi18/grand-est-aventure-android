@@ -19,8 +19,7 @@ export const globalStyles = StyleSheet.create({
   label: {
     fontFamily: FONT.regular,
     color: COLORS.primary,
-    fontSize: FONT_SIZE.lg,
-    fontWeight: "700",
+    fontSize: FONT_SIZE.lg
   },
   input: {
     width: "100%",
@@ -41,12 +40,12 @@ export const globalStyles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 12,
     borderRadius: 12,
+    width: 150
   },
   buttonText: {
-    fontFamily: FONT.regular,
+    fontFamily: FONT.bold,
     color: COLORS.white,
-    fontSize: FONT_SIZE.lg,
-    fontWeight: "700",
+    fontSize: FONT_SIZE.md,
   },
   buttonWhite: {
     backgroundColor: COLORS.white,
@@ -57,31 +56,45 @@ export const globalStyles = StyleSheet.create({
     borderColor: COLORS.green,
     borderWidth: 2,
     borderRadius: 12,
+    width: 150
   },
   buttonTextGreen: {
     fontFamily: FONT.regular,
     color: COLORS.green,
-    fontSize: FONT_SIZE.lg,
-    fontWeight: "700",
+    fontSize: FONT_SIZE.md
   },
   title: {
     fontFamily: FONT.regular,
     color: COLORS.primary,
     fontSize: FONT_SIZE.title,
-    fontWeight: "900",
     textAlign: 'center',
   },
   titleh2: {
     fontFamily: FONT.regular,
     color: COLORS.primary,
     fontSize: FONT_SIZE.lg,
-    fontWeight: "900",
     textAlign: 'center',
   },
   titleGreen: {
-    fontFamily: FONT.regular,
+    fontFamily: FONT.bold,
     color: COLORS.green,
-    fontSize: FONT_SIZE.xl,
-    fontWeight: "900",
-  }
+    fontSize: FONT_SIZE.xl
+  },
+  card: {
+        width: "100%",
+        backgroundColor: "#fef5d9",
+        borderColor: "#b4b4b4",
+        borderWidth: 1.5,
+        borderRadius: 16,
+        padding: 20,
+        marginTop: 16,
+        gap: 5,
+    },
+    logout: {
+        color: "red",
+        textAlign: "right",
+        fontSize: FONT_SIZE.md,
+        fontWeight: "700",
+        paddingHorizontal: 8,
+    }
 });

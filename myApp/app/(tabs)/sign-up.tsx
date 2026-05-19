@@ -93,7 +93,7 @@ const handleDiscordSignUp = async () => {
       <Text style={globalStyles.title}>
         Inscris-toi pour commencer l’aventure !
       </Text>
-      <View style={styles.card}>
+      <View style={styles.inscriptionCard}>
       <Text style={globalStyles.label}>Ton nom?</Text>
       <TextInput
         placeholder="Nom"
@@ -193,7 +193,7 @@ const handleDiscordSignUp = async () => {
   );
 }
 const styles = StyleSheet.create({
-  card: {
+  inscriptionCard: {
       width: "100%",
       backgroundColor: COLORS.white,
       borderRadius: 16,

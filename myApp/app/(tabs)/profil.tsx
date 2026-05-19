@@ -18,7 +18,7 @@ export default function profil() {
 
     return (
         <View style={globalStyles.screen} >
-            <View style={styles.card}>
+            <View style={globalStyles.card}>
                 <Text style={globalStyles.titleGreen}>Mon profil</Text>
                 {user?.name && (
                     <ThemedText style={{ fontSize: 18, fontWeight: "600" }}>{user.name}</ThemedText>
@@ -39,14 +39,14 @@ export default function profil() {
                         <Text style={{ fontFamily: FONT.regular}}>Ton email n&apos;est pas renseignée...</Text>
                     }
                 </View>
-                <TouchableOpacity style={[globalStyles.button, { alignSelf: "flex-end", }]}>
-                    <Text style={[globalStyles.buttonText, { fontSize: FONT_SIZE.md }]}>Modifier mon profil</Text>
+                <TouchableOpacity style={[style.button, {alignSelf: "flex-end", }]}>
+                    <Text style={[style.buttonText, ]}>Modifier mon profil</Text>
                 </TouchableOpacity>
-                <Text style={styles.logout} onPress={handleLogout}>
+                <Text style={globalStyles.logout} onPress={handleLogout}>
                     Se déconnecter
                 </Text>
             </View>
-            <View style={styles.card}>
+            <View style={globalStyles.card}>
                 <Text style={globalStyles.titleGreen}>Histoire des aventures</Text>
                 {user?.adventureStepValidations ? (
                     <Text style={{ fontFamily: FONT.regular}}>{user.adventureStepValidations}</Text>
@@ -54,7 +54,7 @@ export default function profil() {
                     <Text style={{ fontFamily: FONT.regular}}>Tu n&apos;as pas encore fini d&apos;aventure</Text>
                 )}
             </View>
-            <View style={styles.card}>
+            <View style={globalStyles.card}>
                 <Text style={globalStyles.titleGreen}>Collection des badges</Text>
                 {user?.userBadges ? (
                     <Text style={{ fontFamily: FONT.regular}}>{user.userBadges}</Text>
@@ -65,23 +65,17 @@ export default function profil() {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    card: {
-        width: "100%",
-        backgroundColor: "#fef5d9",
-        borderColor: "#b4b4b4",
-        borderWidth: 1.5,
-        borderRadius: 16,
-        padding: 20,
-        marginTop: 16,
-        gap: 5,
-    },
-    logout: {
-        color: "red",
-        textAlign: "right",
-        fontSize: FONT_SIZE.md,
-        fontWeight: "700",
-        paddingHorizontal: 8,
-    },
-});
+const style = StyleSheet.create({
+button: {
+    backgroundColor: COLORS.green,
+    alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    borderRadius: 12
+  },
+  buttonText: {
+    fontFamily: FONT.bold,
+    color: COLORS.white,
+    fontSize: FONT_SIZE.xs,
+  }
+})
