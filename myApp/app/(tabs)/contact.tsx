@@ -161,7 +161,7 @@ export default function Contact() {
       <TouchableOpacity
         style={[
           globalStyles.button,
-          { marginTop: 16, marginHorizontal: 60, marginBottom: 20 },
+          { marginTop: 16, alignSelf: "center", marginBottom: 20 },
           status === "sending" && { opacity: 0.6 },
         ]}
         onPress={handleSubmit}
