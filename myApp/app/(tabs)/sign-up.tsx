@@ -7,6 +7,9 @@ import {
   TouchableOpacity,
   Alert,
   StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { authClient } from "@/lib/auth-client";
 import { globalStyles } from "@/styles/global";
@@ -90,10 +93,23 @@ const handleDiscordSignUp = async () => {
 };
   return (
     <View style={globalStyles.screen}>
-      <Text style={globalStyles.title}>
-        Inscris-toi pour commencer l’aventure !
+       <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+        >
+          <ScrollView
+            contentContainerStyle={{
+              flexGrow: 1,
+              paddingBottom: 40,
+            }}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+          >
+      <Text style={globalStyles.secondTitre}>
+        Inscris-toi pour commencer{"\n"} des aventure !
       </Text>
-      <View style={styles.inscriptionCard}>
+      <View style={globalStyles.card}>
+        <View style={styles.formInput}>
       <Text style={globalStyles.label}>Ton nom?</Text>
       <TextInput
         placeholder="Nom"
@@ -103,7 +119,9 @@ const handleDiscordSignUp = async () => {
         style={globalStyles.input}
         autoCapitalize="none"
       />
-      <Text style={[globalStyles.label, { marginTop: 20 }]}>Ton email?</Text>
+      </View>
+      <View style={styles.formInput}>
+      <Text style={globalStyles.label}>Ton email?</Text>
       <TextInput
         placeholder="Email"
         value={email}
@@ -112,7 +130,9 @@ const handleDiscordSignUp = async () => {
         style={globalStyles.input}
         autoCapitalize="none"
       />
-      <Text style={[globalStyles.label, { marginTop: 15 }]}>Mot de passe?</Text>
+      </View>
+      <View style={styles.formInput}>
+      <Text style={globalStyles.label}>Mot de passe?</Text>
       <View style={styles.showInput}>
       <TextInput
         placeholder="Mot de Passe"
@@ -130,7 +150,9 @@ const handleDiscordSignUp = async () => {
     <FontAwesome name={showPassword ? "eye" : "eye-slash"} size={20} color="gray" />
   </TouchableOpacity>
       </View>
-      <Text style={[globalStyles.label, { marginTop: 15 }]}>Confirme le mot de passe?</Text>
+      </View>
+      <View style={styles.formInput}>
+      <Text style={globalStyles.label}>Confirme le mot de passe?</Text>
       <View style={styles.showInput}>
       <TextInput
         placeholder="Confirme le mot de passe"
@@ -148,12 +170,13 @@ const handleDiscordSignUp = async () => {
     <FontAwesome name={showConfirmPassword ? "eye" : "eye-slash"} size={20} color="gray" />
     </TouchableOpacity>
       </View>
+      </View>
 
       <TouchableOpacity
         onPress={() => {
           handleSubmit();
         }}
-        style={[globalStyles.button, { marginTop: 15 }]}
+        style={[globalStyles.button, { alignSelf: "center" }]}
       >
         <Text style={globalStyles.buttonText}>Inscription</Text>
       </TouchableOpacity>
@@ -189,22 +212,15 @@ const handleDiscordSignUp = async () => {
     <Text style={styles.socialButtonText}>S&apos;inscrire avec Discord</Text>
 </TouchableOpacity>
     </View>
+    </ScrollView>
+    </KeyboardAvoidingView>
     </View>
   );
 }
 const styles = StyleSheet.create({
-  inscriptionCard: {
-      width: "100%",
-      backgroundColor: COLORS.white,
-      borderRadius: 16,
-      padding: 20,
-      marginTop: 16,
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 8,
-      elevation: 4,
-    },
+  formInput: {
+    paddingBottom: 10,
+  },
   showInput: {
     position: 'relative',
     width: '100%',
