@@ -11,8 +11,7 @@ import {
   Alert,
 } from "react-native";
 import { globalStyles } from "@/styles/global";
-import { COLORS, FONT, FONT_SIZE } from "@/styles/theme";
-
+import {FONT } from "@/styles/theme";
 export default function Contact() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");

@@ -6,7 +6,8 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
     paddingTop: 15,
-    paddingHorizontal: 30,
+    paddingBottom:15,
+    paddingHorizontal: 10,
     gap: 5,
   },
   container: {
@@ -73,7 +74,6 @@ export const globalStyles = StyleSheet.create({
     fontFamily: FONT.regular,
     color: COLORS.primary,
     fontSize: FONT_SIZE.lg,
-    textAlign: 'center',
   },
   titleGreen: {
     fontFamily: FONT.bold,
