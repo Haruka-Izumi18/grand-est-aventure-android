@@ -29,7 +29,7 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: COLORS.white,
     paddingVertical: 10,
     paddingHorizontal: 10,
-    fontFamily: 'SpaceMono_700Bold',
+    fontFamily: FONT.regular,
     fontSize: FONT_SIZE.sm,
     color: COLORS.primary,
     marginTop: 12,

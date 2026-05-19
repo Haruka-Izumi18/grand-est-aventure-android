@@ -70,32 +70,70 @@ export default function ContactScreen(){
     }
 
     setState((prevState) => ({ ...prevState, status: "sending" }));
-
+    const apiUrl = "https://baladindices.fr/api/contact";
     const webhookUrl = "https://discord.com/api/webhooks/1506209222885638145/xky7EmUq8T67IxqbyCneaNvlSuyyOpL0GMD_tPNPkG-ZcoQ112G_q7A_-m_rejhL_nAV";
-
-
+    
+    
+    
     const payload = {
-      embeds: [
-        {
-          title: "Nouveau contact client",
-          color: 5814783,
-          fields: [
-            { name: "Nom / Entreprise", value: name, inline: true },
-            { name: "Adresse Email", value: email, inline: true },
-            { name: "Message", value: message },
-          ],
-          timestamp: new Date().toISOString(),
-        },
-      ],
+        name: name.trim(),
+        email: email.trim(),
+        message: message.trim(),
     };
 
 
+
+
+
+
+
+
+    // const payload = {
+    //   embeds: [
+    //     {
+    //       title: "Nouveau contact client",
+    //       color: 5814783,
+    //       fields: [
+    //         { name: "Nom / Entreprise", value: name, inline: true },
+    //         { name: "Adresse Email", value: email, inline: true },
+    //         { name: "Message", value: message },
+    //       ],
+    //       timestamp: new Date().toISOString(),
+    //     },
+    //   ],
+    // };
+
+
     try {
-      const response = await fetch(webhookUrl, {
+      // const response = await fetch(webhookUrl, {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(payload),
+      // });
+
+      const response = await fetch(apiUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+         },
+         credentials: "include",
         body: JSON.stringify(payload),
       });
+
+      
+      // const data = await response.json();
+      // console.log(data);
+
+      if (response.status === 429) {
+        const retryAfter = response.headers.get("Retry-After") || "quelques";
+        setState((prevState) => ({ ...prevState, status: "idle" }));
+        Alert.alert(
+          "Trop de requêtes", 
+          `Merci de patienter ${retryAfter} secondes avant de renvoyer un message.`
+        );
+      return;
+      }
 
       if (response.ok) {
 
@@ -104,7 +142,7 @@ export default function ContactScreen(){
           name:"",
           email:"",
           message:"",
-          status:"",
+          status:"sent",
         }))
 
         setTimeout(() => {
@@ -112,7 +150,7 @@ export default function ContactScreen(){
         },3000);
         } else {
           setState((prevState) => ({ ...prevState, status: "idle" }));
-          Alert.alert("Erreur", "Le serveur Discord a renvoyé une erreur.");
+          Alert.alert("Erreur", "Le serveur a renvoyé une erreur.");
         }
       } catch (error) {
         console.error(error);
