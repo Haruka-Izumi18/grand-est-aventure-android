@@ -16,7 +16,6 @@ export default function AuthLanding() {
       <Text style={[globalStyles.bannerTitle,{textAlign: "center"} ]}>La ville devient{"\n"}une chasse au trésor</Text>
       </View>
       </ImageBackground>
-      
       <Text style={globalStyles.titleh2}>Quelle aventure choisis-tu?</Text>
     </View>
   );

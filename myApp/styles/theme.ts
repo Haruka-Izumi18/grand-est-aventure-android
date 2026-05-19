@@ -3,6 +3,7 @@ export const COLORS = {
   primary: '#251800',
   green: '#68a618',
   white: '#fffffa',
+  grey: '#666',
 };
 
 export const FONT = {
