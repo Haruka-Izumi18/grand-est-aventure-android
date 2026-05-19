@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   View,
   Text,
@@ -7,13 +8,10 @@ import {
   TouchableOpacity,
   ImageBackground,
   StyleSheet,
+  Alert,
 } from "react-native";
 import { globalStyles } from "@/styles/global";
 import { COLORS, FONT, FONT_SIZE } from "@/styles/theme";
-
-import { Alert } from 'react-native';
-
-
 
 export default function Contact() {
   const [name, setName] = useState<string>("");
@@ -21,54 +19,90 @@ export default function Contact() {
   const [message, setMessage] = useState<string>("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
 
+  const [nameError, setNameError] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [messageError, setMessageError] = useState<string>("");
+
+  useFocusEffect(
+    useCallback(() => {
+      setName("");
+      setEmail("");
+      setMessage("");
+      setStatus("idle");
+      setNameError("");
+      setEmailError("");
+      setMessageError("");
+    }, [])
+  );
 
   const handleSubmit = async () => {
+    let hasError = false;
 
-  if (!name.trim() || !email.trim() || !message.trim()) {
-    Alert.alert("Attention", "Veuillez remplir tous les champs.");
-    return;
-  }
-
-  setStatus("sending");
-
-  const webhookUrl = 'https://discord.com/api/webhooks/1506209222885638145/xky7EmUq8T67IxqbyCneaNvlSuyyOpL0GMD_tPNPkG-ZcoQ112G_q7A_-m_rejhL_nAV';
-  const payload = {
-    embeds: [{
-      title: "Nouveau contact client",
-      color: 5814783,
-      fields: [
-        { name: "Nom / Entreprise", value: name, inline: true },
-        { name: "Adresse Email", value: email, inline: true },
-        { name: "Message", value: message }
-      ],
-      timestamp: new Date().toISOString()
-    }]
-  };
-
-  try {
-
-    const response = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-
-    if (response.ok) {
-      setStatus("sent");
-      setName('');
-      setEmail('');
-      setMessage('');
-      setTimeout(() => setStatus("idle"), 3000);
-    } else {
-      setStatus("idle");
-      Alert.alert("Erreur", "Le serveur Discord a renvoyé une erreur.");
+    if (!name.trim()) {
+      setNameError("Merci d'indiquer ton nom :).");
+      hasError = true;
     }
-  } catch (error) {
-    console.error(error);
-    setStatus("idle");
-    Alert.alert("Erreur réseau", "Impossible de joindre le service de contact.");
-  }
-};
+
+    if (!email.trim()) {
+      setEmailError("Une adresse e-mail est requise.");
+      hasError = true;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setEmailError("L'adresse e-mail n'est pas valide.");
+      hasError = true;
+    }
+
+    if (!message.trim()) {
+      setMessageError("Le message ne peut pas être vide.");
+      hasError = true;
+    }
+
+    if (hasError) return;
+
+    setStatus("sending");
+
+    const webhookUrl =
+      "https://discord.com/api/webhooks/1506209222885638145/xky7EmUq8T67IxqbyCneaNvlSuyyOpL0GMD_tPNPkG-ZcoQ112G_q7A_-m_rejhL_nAV";
+    const payload = {
+      embeds: [
+        {
+          title: "Nouveau contact client",
+          color: 5814783,
+          fields: [
+            { name: "Nom / Entreprise", value: name, inline: true },
+            { name: "Adresse Email", value: email, inline: true },
+            { name: "Message", value: message },
+          ],
+          timestamp: new Date().toISOString(),
+        },
+      ],
+    };
+
+    try {
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        setStatus("sent");
+        setName("");
+        setEmail("");
+        setMessage("");
+        setTimeout(() => setStatus("idle"), 3000);
+      } else {
+        setStatus("idle");
+        Alert.alert("Erreur", "Le serveur Discord a renvoyé une erreur.");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("idle");
+      Alert.alert(
+        "Erreur réseau",
+        "Impossible de joindre le service de contact.",
+      );
+    }
+  };
 
   return (
     <ScrollView style={globalStyles.screen}>
@@ -77,49 +111,68 @@ export default function Contact() {
         style={styles.banner}
         resizeMode="cover"
       >
-        <Text style={styles.bannerTitle}>
-          Contacte nous
-        </Text>
+        <Text style={styles.bannerTitle}>Contacte nous</Text>
       </ImageBackground>
 
       <View style={styles.card}>
-        <Text style={[globalStyles.label, { color: COLORS.green }]}>Ton nom</Text>
+        <Text style={[globalStyles.label, { color: COLORS.green }]}>
+          Ton nom
+        </Text>
         <TextInput
           value={name}
-          onChangeText={setName}
-          style={globalStyles.input}
+          onChangeText={(v) => { setName(v); setNameError(""); }}
+          style={[globalStyles.input, nameError ? styles.inputError : null]}
           placeholder="Jean Dupont"
         />
+        {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
 
-        <Text style={[globalStyles.label, { color: COLORS.green, marginTop: 12 }]}>Adresse e-mail</Text>
+        <Text
+          style={[globalStyles.label, { color: COLORS.green, marginTop: 12 }]}
+        >
+          Adresse e-mail
+        </Text>
         <TextInput
           value={email}
-          onChangeText={setEmail}
-          style={globalStyles.input}
+          onChangeText={(v) => { setEmail(v); setEmailError(""); }}
+          style={[globalStyles.input, emailError ? styles.inputError : null]}
           placeholder="jean@exemple.com"
           autoCapitalize="none"
           keyboardType="email-address"
         />
+        {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
 
-        <Text style={[globalStyles.label, { color: COLORS.green, marginTop: 12 }]}>Message</Text>
+        <Text
+          style={[globalStyles.label, { color: COLORS.green, marginTop: 12 }]}
+        >
+          Message
+        </Text>
         <TextInput
           value={message}
-          onChangeText={setMessage}
-          style={[globalStyles.input, styles.textArea]}
+          onChangeText={(v) => { setMessage(v); setMessageError(""); }}
+          style={[globalStyles.input, styles.textArea, messageError ? styles.inputError : null]}
           placeholder="Ton message..."
           multiline
-          numberOfLines={5}
+          numberOfLines={4}
           textAlignVertical="top"
         />
+        {messageError ? <Text style={styles.errorText}>{messageError}</Text> : null}
       </View>
 
       <TouchableOpacity
-        style={[globalStyles.button, { marginTop: 25, marginHorizontal: 60 }, status === "sending" && { opacity: 0.6 }]}
+        style={[
+          globalStyles.button,
+          { marginTop: 16, marginHorizontal: 60, marginBottom: 20 },
+          status === "sending" && { opacity: 0.6 },
+        ]}
         onPress={handleSubmit}
         disabled={status !== "idle"}
       >
         <Text style={globalStyles.buttonText}>
-          {status === "sending" ? "Envoi en cours..." : status === "sent" ? "Message envoyé" : "Envoyer"}
+          {status === "sending"
+            ? "Envoi en cours..."
+            : status === "sent"
+              ? "Message envoyé"
+              : "Envoyer"}
         </Text>
       </TouchableOpacity>
     </ScrollView>
@@ -128,7 +181,7 @@ export default function Contact() {
 
 const styles = StyleSheet.create({
   banner: {
-    height: 150,
+    height: 120,
     marginHorizontal: -30,
     justifyContent: "center",
     alignItems: "center",
@@ -139,8 +192,8 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: COLORS.green,
     borderRadius: 16,
-    padding: 20,
-    marginTop: 24,
+    padding: 16,
+    marginTop: 16,
     gap: 4,
   },
   bannerTitle: {
@@ -148,8 +201,18 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE.title,
     color: COLORS.white,
   },
+  inputError: {
+    borderColor: "#e53935",
+  },
+  errorText: {
+    fontFamily: FONT.regular,
+    color: "#e53935",
+    fontSize: 12,
+    marginTop: 3,
+    marginLeft: 4,
+  },
   textArea: {
-    height: 120,
+    height: 90,
     paddingTop: 10,
   },
 });
