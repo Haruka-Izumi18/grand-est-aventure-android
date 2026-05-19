@@ -11,14 +11,63 @@ import {
 import { globalStyles } from "@/styles/global";
 import { COLORS, FONT, FONT_SIZE } from "@/styles/theme";
 
-export default function Contact() {
-  const [nom, setNom] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+import { Alert } from 'react-native';
 
-  const handleEnvoyer = () => {
-    console.log({ nom, email, message }); //--------------------------
+
+
+export default function Contact() {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+
+
+  const handleSubmit = async () => {
+
+  if (!name.trim() || !email.trim() || !message.trim()) {
+    Alert.alert("Attention", "Veuillez remplir tous les champs.");
+    return;
+  }
+
+  setStatus("sending");
+
+  const webhookUrl = 'https://discord.com/api/webhooks/1506209222885638145/xky7EmUq8T67IxqbyCneaNvlSuyyOpL0GMD_tPNPkG-ZcoQ112G_q7A_-m_rejhL_nAV';
+  const payload = {
+    embeds: [{
+      title: "Nouveau contact client",
+      color: 5814783,
+      fields: [
+        { name: "Nom / Entreprise", value: name, inline: true },
+        { name: "Adresse Email", value: email, inline: true },
+        { name: "Message", value: message }
+      ],
+      timestamp: new Date().toISOString()
+    }]
   };
+
+  try {
+
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (response.ok) {
+      setStatus("sent");
+      setName('');
+      setEmail('');
+      setMessage('');
+    } else {
+      setStatus("idle");
+      Alert.alert("Erreur", "Le serveur Discord a renvoyé une erreur.");
+    }
+  } catch (error) {
+    console.error(error);
+    setStatus("idle");
+    Alert.alert("Erreur réseau", "Impossible de joindre le service de contact.");
+  }
+};
 
   return (
     <ScrollView style={globalStyles.screen}>
@@ -35,8 +84,8 @@ export default function Contact() {
       <View style={styles.card}>
         <Text style={[globalStyles.label, { color: COLORS.green }]}>Ton nom</Text>
         <TextInput
-          value={nom}
-          onChangeText={setNom}
+          value={name}
+          onChangeText={setName}
           style={globalStyles.input}
           placeholder="Jean Dupont"
         />
@@ -64,10 +113,13 @@ export default function Contact() {
       </View>
 
       <TouchableOpacity
-        style={[globalStyles.button, { marginTop: 25, marginHorizontal: 60 }]}
-        onPress={handleEnvoyer}
+        style={[globalStyles.button, { marginTop: 25, marginHorizontal: 60 }, status === "sending" && { opacity: 0.6 }]}
+        onPress={handleSubmit}
+        disabled={status !== "idle"}
       >
-        <Text style={globalStyles.buttonText}>Envoyer</Text>
+        <Text style={globalStyles.buttonText}>
+          {status === "sending" ? "Envoi en cours..." : status === "sent" ? "Message envoyé" : "Envoyer"}
+        </Text>
       </TouchableOpacity>
     </ScrollView>
   );

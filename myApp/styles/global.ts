@@ -20,7 +20,6 @@ export const globalStyles = StyleSheet.create({
     fontFamily: FONT.regular,
     color: COLORS.primary,
     fontSize: FONT_SIZE.lg,
-    fontWeight: "700",
   },
   input: {
     width: "100%",
@@ -46,7 +45,6 @@ export const globalStyles = StyleSheet.create({
     fontFamily: FONT.regular,
     color: COLORS.white,
     fontSize: FONT_SIZE.lg,
-    fontWeight: "700",
   },
   buttonWhite: {
     backgroundColor: COLORS.white,
@@ -62,26 +60,22 @@ export const globalStyles = StyleSheet.create({
     fontFamily: FONT.regular,
     color: COLORS.green,
     fontSize: FONT_SIZE.lg,
-    fontWeight: "700",
   },
   title: {
     fontFamily: FONT.regular,
     color: COLORS.primary,
     fontSize: FONT_SIZE.title,
-    fontWeight: "900",
     textAlign: 'center',
   },
   titleh2: {
     fontFamily: FONT.regular,
     color: COLORS.primary,
     fontSize: FONT_SIZE.lg,
-    fontWeight: "900",
     textAlign: 'center',
   },
   titleGreen: {
     fontFamily: FONT.regular,
     color: COLORS.green,
     fontSize: FONT_SIZE.xl,
-    fontWeight: "900",
-  }
+  },
 });
