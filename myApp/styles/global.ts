@@ -17,9 +17,9 @@ export const globalStyles = StyleSheet.create({
     gap: 16 ,
   },
   label: {
-    fontFamily: FONT.regular,
-    color: COLORS.primary,
-    fontSize: FONT_SIZE.lg,
+    fontFamily: FONT.bold,
+    color: COLORS.green,
+    fontSize: FONT_SIZE.md,
   },
   input: {
     width: "100%",
@@ -32,7 +32,7 @@ export const globalStyles = StyleSheet.create({
     fontFamily: 'SpaceMono_700Bold',
     fontSize: FONT_SIZE.sm,
     color: COLORS.primary,
-    marginTop: 12,
+    marginTop: 5,
   },
   button: {
     backgroundColor: COLORS.green,
@@ -73,6 +73,12 @@ export const globalStyles = StyleSheet.create({
     fontFamily: FONT.regular,
     color: COLORS.primary,
     fontSize: FONT_SIZE.lg,
+    textAlign: 'center',
+  },
+  secondTitre: {
+    fontFamily: FONT.bold,
+    color: COLORS.primary,
+    fontSize: FONT_SIZE.md,
     textAlign: 'center',
   },
   titleGreen: {
