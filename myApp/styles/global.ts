@@ -40,11 +40,12 @@ export const globalStyles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 12,
     borderRadius: 12,
+    width: 150
   },
   buttonText: {
-    fontFamily: FONT.regular,
+    fontFamily: FONT.bold,
     color: COLORS.white,
-    fontSize: FONT_SIZE.lg,
+    fontSize: FONT_SIZE.md,
   },
   buttonWhite: {
     backgroundColor: COLORS.white,
@@ -55,11 +56,12 @@ export const globalStyles = StyleSheet.create({
     borderColor: COLORS.green,
     borderWidth: 2,
     borderRadius: 12,
+    width: 150
   },
   buttonTextGreen: {
     fontFamily: FONT.regular,
     color: COLORS.green,
-    fontSize: FONT_SIZE.lg,
+    fontSize: FONT_SIZE.md
   },
   title: {
     fontFamily: FONT.regular,
@@ -74,8 +76,25 @@ export const globalStyles = StyleSheet.create({
     textAlign: 'center',
   },
   titleGreen: {
-    fontFamily: FONT.regular,
+    fontFamily: FONT.bold,
     color: COLORS.green,
-    fontSize: FONT_SIZE.xl,
+    fontSize: FONT_SIZE.xl
   },
+  card: {
+        width: "100%",
+        backgroundColor: "#fef5d9",
+        borderColor: "#b4b4b4",
+        borderWidth: 1.5,
+        borderRadius: 16,
+        padding: 20,
+        marginTop: 16,
+        gap: 5,
+    },
+    logout: {
+        color: "red",
+        textAlign: "right",
+        fontSize: FONT_SIZE.md,
+        fontWeight: "700",
+        paddingHorizontal: 8,
+    }
 });

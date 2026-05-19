@@ -1,6 +1,5 @@
-import { Link } from 'expo-router';
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { router } from "expo-router";
+import { router, Link } from "expo-router";
 import { globalStyles } from '@/styles/global';
 
 export default function Modal() {
@@ -12,7 +11,7 @@ export default function Modal() {
         style={globalStyles.button}
         onPress={() => router.replace("/sign-in")}
       >
-        <Text style={globalStyles.buttonText}>Connexion</Text>
+        <Text style={[globalStyles.buttonText]}>Connexion</Text>
       </TouchableOpacity>
 
       <TouchableOpacity

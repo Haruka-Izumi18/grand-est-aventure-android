@@ -3,15 +3,17 @@ import { Tabs, router } from 'expo-router';
 import { TouchableOpacity, View } from 'react-native';
 import { COLORS } from '@/styles/theme';
 import { authClient } from '@/lib/auth-client';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function TabLayout() {
   const { data: session } = authClient.useSession();
+  const insets = useSafeAreaInsets()
 
   return (
     <Tabs
       screenOptions={{ headerShown: false }}
       tabBar={(props) => (
-        <View style={{ flexDirection: 'row', height: 60, backgroundColor: 'white', borderTopWidth: 1, borderTopColor: '#eee' }}>
+        <View style={{ flexDirection: 'row', height: 60 + insets.bottom, paddingBottom: insets.bottom, backgroundColor: 'white', borderTopWidth: 1, borderTopColor: '#eee' }}>
           {props.state.routes
             .filter((route) => ['liste-adventure', 'question', 'contact'].includes(route.name))
             .map((route) => {
