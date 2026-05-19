@@ -19,7 +19,7 @@ export const globalStyles = StyleSheet.create({
   label: {
     fontFamily: FONT.regular,
     color: COLORS.primary,
-    fontSize: FONT_SIZE.lg
+    fontSize: FONT_SIZE.lg,
   },
   input: {
     width: "100%",
