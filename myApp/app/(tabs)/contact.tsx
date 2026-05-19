@@ -121,10 +121,10 @@ export default function Contact() {
         <TextInput
           value={name}
           onChangeText={(v) => { setName(v); setNameError(""); }}
-          style={[globalStyles.input, nameError ? styles.inputError : null]}
+          style={[globalStyles.input, nameError ? globalStyles.inputError : null]}
           placeholder="Jean Dupont"
         />
-        {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
+        {nameError ? <Text style={globalStyles.errorText}>{nameError}</Text> : null}
 
         <Text
           style={[globalStyles.titleGreen]}
@@ -134,12 +134,12 @@ export default function Contact() {
         <TextInput
           value={email}
           onChangeText={(v) => { setEmail(v); setEmailError(""); }}
-          style={[globalStyles.input, emailError ? styles.inputError : null]}
+          style={[globalStyles.input, emailError ? globalStyles.inputError : null]}
           placeholder="jean@exemple.com"
           autoCapitalize="none"
           keyboardType="email-address"
         />
-        {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
+        {emailError ? <Text style={globalStyles.errorText}>{emailError}</Text> : null}
 
         <Text
           style={[globalStyles.titleGreen]}
@@ -149,13 +149,13 @@ export default function Contact() {
         <TextInput
           value={message}
           onChangeText={(v) => { setMessage(v); setMessageError(""); }}
-          style={[globalStyles.input, styles.textArea, messageError ? styles.inputError : null]}
+          style={[globalStyles.input, globalStyles.textArea, messageError ? globalStyles.inputError : null]}
           placeholder="Ton message..."
           multiline
           numberOfLines={4}
           textAlignVertical="top"
         />
-        {messageError ? <Text style={styles.errorText}>{messageError}</Text> : null}
+        {messageError ? <Text style={globalStyles.errorText}>{messageError}</Text> : null}
       </View>
 
       <TouchableOpacity
@@ -187,19 +187,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     overflow: "hidden",
     marginBottom: 4,
-  },
-  inputError: {
-    borderColor: "#e53935",
-  },
-  errorText: {
-    fontFamily: FONT.regular,
-    color: "#e53935",
-    fontSize: 12,
-    marginTop: 3,
-    marginLeft: 4,
-  },
-  textArea: {
-    height: 90,
-    paddingTop: 10,
   },
 });

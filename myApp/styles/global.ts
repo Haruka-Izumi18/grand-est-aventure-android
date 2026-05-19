@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { COLORS, FONT, FONT_SIZE } from './theme';
+import { StyleSheet } from "react-native";
+import { COLORS, FONT, FONT_SIZE } from "./theme";
 
 export const globalStyles = StyleSheet.create({
   screen: {
@@ -14,7 +14,7 @@ export const globalStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    gap: 16 ,
+    gap: 16,
   },
   label: {
     fontFamily: FONT.regular,
@@ -29,7 +29,7 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: COLORS.white,
     paddingVertical: 10,
     paddingHorizontal: 10,
-    fontFamily: 'SpaceMono_700Bold',
+    fontFamily: "SpaceMono_700Bold",
     fontSize: FONT_SIZE.sm,
     color: COLORS.primary,
     marginTop: 12,
@@ -40,7 +40,7 @@ export const globalStyles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 12,
     borderRadius: 12,
-    width: 150
+    width: 150,
   },
   buttonText: {
     fontFamily: FONT.bold,
@@ -56,50 +56,64 @@ export const globalStyles = StyleSheet.create({
     borderColor: COLORS.green,
     borderWidth: 2,
     borderRadius: 12,
-    width: 150
+    width: 150,
   },
   buttonTextGreen: {
     fontFamily: FONT.regular,
     color: COLORS.green,
-    fontSize: FONT_SIZE.md
+    fontSize: FONT_SIZE.md,
   },
   title: {
     fontFamily: FONT.regular,
     color: COLORS.primary,
     fontSize: FONT_SIZE.title,
-    textAlign: 'center',
+    textAlign: "center",
   },
   titleh2: {
     fontFamily: FONT.regular,
     color: COLORS.primary,
     fontSize: FONT_SIZE.lg,
-    textAlign: 'center',
+    textAlign: "center",
   },
   titleGreen: {
     fontFamily: FONT.bold,
     color: COLORS.green,
-    fontSize: FONT_SIZE.xl
+    fontSize: FONT_SIZE.xl,
   },
   card: {
-        width: "100%",
-        backgroundColor: "#fef5d9",
-        borderColor: "#b4b4b4",
-        borderWidth: 1.5,
-        borderRadius: 16,
-        padding: 20,
-        marginTop: 16,
-        gap: 5,
-    },
-    logout: {
-        color: "red",
-        textAlign: "right",
-        fontSize: FONT_SIZE.md,
-        fontWeight: "700",
-        paddingHorizontal: 8,
-    },
-    bannerTitle: {
+    width: "100%",
+    backgroundColor: "#fef5d9",
+    borderColor: "#b4b4b4",
+    borderWidth: 1.5,
+    borderRadius: 16,
+    padding: 20,
+    marginTop: 16,
+    gap: 5,
+  },
+  logout: {
+    color: "red",
+    textAlign: "right",
+    fontSize: FONT_SIZE.md,
+    fontWeight: "700",
+    paddingHorizontal: 8,
+  },
+  bannerTitle: {
     color: COLORS.white,
     fontFamily: FONT.bold,
-    fontSize: FONT_SIZE.title
+    fontSize: FONT_SIZE.title,
+  },
+  errorText: {
+    fontFamily: FONT.regular,
+    color: "#e53935",
+    fontSize: 12,
+    marginTop: 3,
+    marginLeft: 4,
+  },
+  inputError: {
+    borderColor: "#e53935",
+  },
+  textArea: {
+    height: 90,
+    paddingTop: 10,
   },
 });
