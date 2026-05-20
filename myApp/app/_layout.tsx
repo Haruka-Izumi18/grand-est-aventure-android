@@ -3,6 +3,7 @@ import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import { authClient } from '@/lib/auth-client';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { Stack } from 'expo-router';
 
 SplashScreen.preventAutoHideAsync();
 
