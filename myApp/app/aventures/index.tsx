@@ -48,7 +48,7 @@ export default function ListeAdventure() {
 
     return (
         <View style={globalStyles.screen}>
-            <Text style={[styles.title, { fontFamily: FONT.regular }]}>
+            <Text style={[globalStyles.title, { fontFamily: FONT.bold }]}>
                 Liste des aventures
             </Text>
 
@@ -79,22 +79,22 @@ export default function ListeAdventure() {
 
                                 {/* Ville */}
                                 <Text style={styles.detail}>
-                                    📍 {item.city.name} ({item.city.postalCodes[0]})
+                                    📍  {item.city.name} ({item.city.postalCodes[0]})
                                 </Text>
 
                                 {/* Durée estimée */}
                                 <Text style={styles.detail}>
-                                    ⏱ Durée estimée : {formatDuration(item.estimatedDurationSeconds)}
+                                     ⌚  Durée estimée : {formatDuration(item.estimatedDurationSeconds)}
                                 </Text>
 
                                 {/* Nombre d'énigmes */}
                                 <Text style={styles.detail}>
-                                    🧩 {item.enigmaCount} énigme{item.enigmaCount > 1 ? 's' : ''}
+                                    🧩  {item.enigmaCount} énigme{item.enigmaCount > 1 ? 's' : ''}
                                 </Text>
 
                                 {/* Distance */}
                                 <Text style={styles.detail}>
-                                    🚶 {item.distanceFromUserKm} km de vous
+                                    🚶  {item.distanceFromUserKm} km de vous
                                 </Text>
 
                                 {/* Trésor */}
@@ -111,11 +111,6 @@ export default function ListeAdventure() {
 }
 
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 22,
-        fontWeight: "bold",
-        padding: 20,
-    },
     empty: {
         padding: 20,
         textAlign: "center",
