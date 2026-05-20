@@ -122,13 +122,14 @@ const styles = StyleSheet.create({
         resizeMode: "cover",
     },
     info: {
-        padding: 12,
-        gap: 4,
+        padding: 10,
+        gap: 2,
     },
     treasure: {
         fontSize: 14,
         color: "#c8a000",
         fontWeight: "bold",
         marginTop: 4,
+        alignSelf: "center"
     },
 });
