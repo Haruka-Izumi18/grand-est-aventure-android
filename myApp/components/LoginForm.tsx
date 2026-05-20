@@ -44,7 +44,7 @@ export default function LoginForm({ onSignUpPress }: LoginFormProps) {
     if (error) {
       console.log("Error", error);
     } else {
-      router.push("/profil/profil");
+      router.push("/profil/user-profil");
     }
   };
 
@@ -71,7 +71,7 @@ export default function LoginForm({ onSignUpPress }: LoginFormProps) {
     setLoading(true);
     const { error } = await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/profil",
+      callbackURL: "/user-profil",
     });
     setLoading(false);
     if (error) {
@@ -86,7 +86,7 @@ export default function LoginForm({ onSignUpPress }: LoginFormProps) {
     setLoading(true);
     const { error } = await authClient.signIn.social({
       provider: "facebook",
-      callbackURL: "/profil",
+      callbackURL: "/user-profil",
     });
     setLoading(false);
     if (error) {
@@ -101,7 +101,7 @@ export default function LoginForm({ onSignUpPress }: LoginFormProps) {
     setLoading(true);
     const { error } = await authClient.signIn.social({
       provider: "discord",
-      callbackURL: "/profil",
+      callbackURL: "/user-profil",
     });
     setLoading(false);
     if (error) {

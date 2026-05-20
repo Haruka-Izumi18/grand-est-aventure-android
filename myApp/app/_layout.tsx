@@ -3,7 +3,6 @@ import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import { authClient } from '@/lib/auth-client';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { Stack } from 'expo-router';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -47,7 +46,7 @@ export default function TabLayout() {
         <NativeTabs.Trigger.Icon sf="envelope.fill" md="mail" />
       </NativeTabs.Trigger>
 
-      <NativeTabs.Trigger name={session ? "profil/profil" : "profil/index"}>
+      <NativeTabs.Trigger name={session ? "profil/user-profil" : "profil/index"}>
         <NativeTabs.Trigger.Label>Compte</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf="person.crop.circle.fill" md="person" />
       </NativeTabs.Trigger>
