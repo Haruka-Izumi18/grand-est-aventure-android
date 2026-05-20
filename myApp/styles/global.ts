@@ -5,7 +5,7 @@ export const globalStyles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: COLORS.background,
-    paddingTop: 15,
+    paddingTop: 50,
     paddingBottom:15,
     paddingHorizontal: 10,
     gap: 5,
