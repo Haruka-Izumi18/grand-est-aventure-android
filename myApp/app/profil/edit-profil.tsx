@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { globalStyles } from "@/styles/global";
 import { authClient } from "@/lib/auth-client";
-import { router } from "expo-router";
+import { Redirect, router } from "expo-router";
 import { COLORS, FONT } from "@/styles/theme";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
@@ -14,8 +14,13 @@ export default function editProfil (){
 
     const handleLogout = async () => {
         await authClient.signOut();
-        router.push("/");
+        router.replace("/profil");
+    };
+
+    if (!session) {
+        return <Redirect href="/profil" />;
     }
+
     return (
         <View style={globalStyles.screen} >
             <View style={globalStyles.card}>

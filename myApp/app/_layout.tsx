@@ -1,14 +1,11 @@
 import { useEffect } from 'react';
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
-import { authClient } from '@/lib/auth-client';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function TabLayout() {
-  const { data: session } = authClient.useSession();
-
   const [loaded, error] = useFonts({
     SpaceMono_Regular: require('../assets/fonts/SpaceMono-Regular.ttf'),
     SpaceMono_Bold: require('../assets/fonts/SpaceMono-Bold.ttf'),
@@ -46,7 +43,7 @@ export default function TabLayout() {
         <NativeTabs.Trigger.Icon sf="envelope.fill" md="mail" />
       </NativeTabs.Trigger>
 
-      <NativeTabs.Trigger name={session ? "profil/user-profil" : "profil/index"}>
+      <NativeTabs.Trigger name="profil">
         <NativeTabs.Trigger.Label>Compte</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf="person.crop.circle.fill" md="person" />
       </NativeTabs.Trigger>
