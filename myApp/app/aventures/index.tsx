@@ -62,7 +62,7 @@ export default function ListeAdventure() {
                     keyExtractor={(item) => item.id}
                     contentContainerStyle={{ padding: 20, gap: 16 }}
                     renderItem={({ item }) => (
-                        <View style={styles.card}>
+                        <View style={[globalStyles.card, {padding: 5}]}>
                             {/* Image de couverture */}
                             {item.coverImageUrl ? (
                                 <Image
@@ -73,27 +73,27 @@ export default function ListeAdventure() {
 
                             <View style={styles.info}>
                                 {/* Nom */}
-                                <Text style={[styles.name, { fontFamily: FONT.regular }]}>
+                                <Text style={[globalStyles.titleh2, { fontFamily: FONT.bold }]}>
                                     {item.name}
                                 </Text>
 
                                 {/* Ville */}
-                                <Text style={styles.detail}>
+                                <Text style={[globalStyles.text, { fontFamily: FONT.bold }]}>
                                     📍  {item.city.name} ({item.city.postalCodes[0]})
                                 </Text>
 
                                 {/* Durée estimée */}
-                                <Text style={styles.detail}>
-                                     ⌚  Durée estimée : {formatDuration(item.estimatedDurationSeconds)}
+                                <Text style={[globalStyles.text, { fontFamily: FONT.bold }]}>
+                                     ⌚  Durée estimée : <Text style={globalStyles.text}>{formatDuration(item.estimatedDurationSeconds)}</Text>
                                 </Text>
 
                                 {/* Nombre d'énigmes */}
-                                <Text style={styles.detail}>
+                                <Text style={[globalStyles.text, { fontFamily: FONT.bold }]}>
                                     🧩  {item.enigmaCount} énigme{item.enigmaCount > 1 ? 's' : ''}
                                 </Text>
 
                                 {/* Distance */}
-                                <Text style={styles.detail}>
+                                <Text style={[globalStyles.text, { fontFamily: FONT.bold }]}>
                                     🚶  {item.distanceFromUserKm} km de vous
                                 </Text>
 
@@ -116,15 +116,6 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: "#888",
     },
-    card: {
-        borderRadius: 12,
-        backgroundColor: "#fff",
-        shadowColor: "#000",
-        shadowOpacity: 0.08,
-        shadowRadius: 6,
-        elevation: 3,
-        overflow: "hidden",
-    },
     cover: {
         width: "100%",
         height: 160,
@@ -133,15 +124,6 @@ const styles = StyleSheet.create({
     info: {
         padding: 12,
         gap: 4,
-    },
-    name: {
-        fontSize: 18,
-        fontWeight: "bold",
-        marginBottom: 6,
-    },
-    detail: {
-        fontSize: 14,
-        color: "#444",
     },
     treasure: {
         fontSize: 14,

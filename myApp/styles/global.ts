@@ -108,4 +108,9 @@ export const globalStyles = StyleSheet.create({
     fontFamily: FONT.bold,
     fontSize: FONT_SIZE.title
   },
+  text: {
+    color: COLORS.primary,
+    fontFamily: FONT.regular,
+    fontSize: FONT_SIZE.xs
+  }
 });
