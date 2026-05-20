@@ -19,7 +19,11 @@ import * as WebBrowser from "expo-web-browser";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
-export default function SignIn() {
+interface LoginFormProps {
+  onSignUpPress: () => void;
+}
+
+export default function LoginForm({ onSignUpPress }: LoginFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -40,7 +44,7 @@ export default function SignIn() {
     if (error) {
       console.log("Error", error);
     } else {
-      router.push("/profil");
+      router.push("/profil/profil");
     }
   };
 
@@ -233,7 +237,7 @@ export default function SignIn() {
             </Text>
             <TouchableOpacity
               style={[globalStyles.buttonWhite, { alignSelf: "center", marginTop: 20 }]}
-              onPress={() => router.replace("/sign-up")}
+              onPress={onSignUpPress}
             >
               <Text style={globalStyles.buttonTextGreen}>Inscription</Text>
             </TouchableOpacity>
@@ -243,6 +247,7 @@ export default function SignIn() {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   formInput: {
     paddingBottom: 10,

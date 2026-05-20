@@ -46,7 +46,7 @@ export default function TabLayout() {
         <NativeTabs.Trigger.Icon sf="envelope.fill" md="mail" />
       </NativeTabs.Trigger>
 
-      <NativeTabs.Trigger name={session ? "profile/profil" : "profile/index"}>
+      <NativeTabs.Trigger name={session ? "profil/profil" : "profil/index"}>
         <NativeTabs.Trigger.Label>Compte</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf="person.crop.circle.fill" md="person" />
       </NativeTabs.Trigger>
