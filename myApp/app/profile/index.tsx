@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -11,11 +11,11 @@ import {
   Platform,
   StyleSheet,
 } from "react-native";
-import { router, Link } from "expo-router";
+import { router } from "expo-router";
 import { globalStyles } from "@/styles/global";
 import { authClient } from "@/lib/auth-client";
 import * as WebBrowser from "expo-web-browser";
-import { useEffect } from "react";
+
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
@@ -128,40 +128,40 @@ export default function SignIn() {
             </Text>
             <View style={globalStyles.card}>
               <View style={styles.formInput}>
-              <Text style={globalStyles.label}>Ton email?</Text>
-              <TextInput
-                placeholder="m@exemple.com"
-                value={email}
-                accessibilityLabel="Adresse email"
-                onChangeText={setEmail}
-                style={globalStyles.input}
-                autoCapitalize="none"
-              />
-              </View>
-               <View style={styles.formInput}>
-              <Text style={globalStyles.label}>
-                Ton mot de passe?
-              </Text>
-              <View style={styles.showInput}>
+                <Text style={globalStyles.label}>Ton email?</Text>
                 <TextInput
-                  placeholder="Mot de passe"
-                  value={password}
-                  accessibilityLabel="Mot de passe"
-                  onChangeText={setPassword}
+                  placeholder="m@exemple.com"
+                  value={email}
+                  accessibilityLabel="Adresse email"
+                  onChangeText={setEmail}
                   style={globalStyles.input}
                   autoCapitalize="none"
-                  secureTextEntry={!showPassword}
                 />
-                <TouchableOpacity
-                  style={styles.eyeIcon}
-                  onPress={() => setShowPassword(!showPassword)}
-                >
-                  <FontAwesome
-                    name={showPassword ? "eye" : "eye-slash"}
-                    size={20}
-                    color="gray"
+              </View>
+              <View style={styles.formInput}>
+                <Text style={globalStyles.label}>
+                  Ton mot de passe?
+                </Text>
+                <View style={styles.showInput}>
+                  <TextInput
+                    placeholder="Mot de passe"
+                    value={password}
+                    accessibilityLabel="Mot de passe"
+                    onChangeText={setPassword}
+                    style={globalStyles.input}
+                    autoCapitalize="none"
+                    secureTextEntry={!showPassword}
                   />
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.eyeIcon}
+                    onPress={() => setShowPassword(!showPassword)}
+                  >
+                    <FontAwesome
+                      name={showPassword ? "eye" : "eye-slash"}
+                      size={20}
+                      color="gray"
+                    />
+                  </TouchableOpacity>
                 </View>
               </View>
 
@@ -229,7 +229,7 @@ export default function SignIn() {
             </View>
 
             <Text style={[globalStyles.secondTitre, { marginTop: 30 }]}>
-                    Tu n&apos; pas encore ton compte?{"\n"} Inscris toi!
+              Tu n&apos; pas encore ton compte?{"\n"} Inscris toi!
             </Text>
             <TouchableOpacity
               style={[globalStyles.buttonWhite, { alignSelf: "center" }]}
