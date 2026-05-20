@@ -11,91 +11,150 @@ import {
   Alert,
 } from "react-native";
 import { globalStyles } from "@/styles/global";
-import {FONT } from "@/styles/theme";
-export default function Contact() {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+import { FONT } from "@/styles/theme";
 
-  const [nameError, setNameError] = useState<string>("");
-  const [emailError, setEmailError] = useState<string>("");
-  const [messageError, setMessageError] = useState<string>("");
+const initialState = {
+  name: "",
+  email: "",
+  message: "",
+  status: "idle", //| "sending" | "sent">("idle"),
+  nameError: "",
+  emailError: "",
+  messageError: "",
+};
+
+export default function ContactScreen() {
+  const [state, setState] = useState(initialState)
+
+  const { name, email, message, status, nameError, emailError, messageError } = state;
 
   useFocusEffect(
     useCallback(() => {
-      setName("");
-      setEmail("");
-      setMessage("");
-      setStatus("idle");
-      setNameError("");
-      setEmailError("");
-      setMessageError("");
+      setState(initialState);
     }, [])
   );
 
   const handleSubmit = async () => {
+
     let hasError = false;
+    let errors = {
+      nameError: "",
+      emailError: "",
+      messageError: "",
+    };
 
     if (!name.trim()) {
-      setNameError("Merci d'indiquer ton nom :).");
+      errors.nameError = "Merci d'indiquer ton nom :).";
       hasError = true;
     }
 
     if (!email.trim()) {
-      setEmailError("Une adresse e-mail est requise.");
+      errors.emailError = "Une adresse e-mail est requise.";
       hasError = true;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      setEmailError("L'adresse e-mail n'est pas valide.");
+      errors.emailError = "L'adresse e-mail n'est pas valide.";
       hasError = true;
     }
 
     if (!message.trim()) {
-      setMessageError("Le message ne peut pas être vide.");
+      errors.messageError = "Le message ne peut pas être vide.";
       hasError = true;
     }
 
-    if (hasError) return;
+    if (hasError) {
+      setState((prevState) => ({
+        ...prevState,
+        ...errors,
+      }));
+      return;
+    }
 
-    setStatus("sending");
+    setState((prevState) => ({ ...prevState, status: "sending" }));
+    const apiUrl = "https://baladindices.fr/api/contact";
+    const webhookUrl = "https://discord.com/api/webhooks/1506209222885638145/xky7EmUq8T67IxqbyCneaNvlSuyyOpL0GMD_tPNPkG-ZcoQ112G_q7A_-m_rejhL_nAV";
 
-    const webhookUrl =
-      "https://discord.com/api/webhooks/1506209222885638145/xky7EmUq8T67IxqbyCneaNvlSuyyOpL0GMD_tPNPkG-ZcoQ112G_q7A_-m_rejhL_nAV";
+
+
     const payload = {
-      embeds: [
-        {
-          title: "Nouveau contact client",
-          color: 5814783,
-          fields: [
-            { name: "Nom / Entreprise", value: name, inline: true },
-            { name: "Adresse Email", value: email, inline: true },
-            { name: "Message", value: message },
-          ],
-          timestamp: new Date().toISOString(),
-        },
-      ],
+      name: name.trim(),
+      email: email.trim(),
+      message: message.trim(),
     };
 
+
+
+
+
+
+
+
+    // const payload = {
+    //   embeds: [
+    //     {
+    //       title: "Nouveau contact client",
+    //       color: 5814783,
+    //       fields: [
+    //         { name: "Nom / Entreprise", value: name, inline: true },
+    //         { name: "Adresse Email", value: email, inline: true },
+    //         { name: "Message", value: message },
+    //       ],
+    //       timestamp: new Date().toISOString(),
+    //     },
+    //   ],
+    // };
+
+
     try {
-      const response = await fetch(webhookUrl, {
+      // const response = await fetch(webhookUrl, {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(payload),
+      // });
+
+      const response = await fetch(apiUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        credentials: "include",
         body: JSON.stringify(payload),
       });
 
+
+      // const data = await response.json();
+      // console.log(data);
+
+      if (response.status === 429) {
+        const retryAfter = response.headers.get("Retry-After") || "quelques";
+        setState((prevState) => ({ ...prevState, status: "idle" }));
+        Alert.alert(
+          "Trop de requêtes",
+          `Merci de patienter ${retryAfter} secondes avant de renvoyer un message.`
+        );
+        return;
+      }
+
       if (response.ok) {
-        setStatus("sent");
-        setName("");
-        setEmail("");
-        setMessage("");
-        setTimeout(() => setStatus("idle"), 3000);
+
+        setState((prevState) => ({
+          ...prevState,
+          name: "",
+          email: "",
+          message: "",
+          status: "sent",
+        }))
+
+        setTimeout(() => {
+          setState((prevState) => ({ ...prevState, status: "idle" }));
+        }, 3000);
       } else {
-        setStatus("idle");
-        Alert.alert("Erreur", "Le serveur Discord a renvoyé une erreur.");
+        setState((prevState) => ({ ...prevState, status: "idle" }));
+        Alert.alert("Erreur", "Le serveur a renvoyé une erreur.");
       }
     } catch (error) {
       console.error(error);
-      setStatus("idle");
+      setState((prevState) => ({ ...prevState, status: "idle" }));
       Alert.alert(
         "Erreur réseau",
         "Impossible de joindre le service de contact.",
@@ -119,8 +178,9 @@ export default function Contact() {
         </Text>
         <TextInput
           value={name}
-          onChangeText={(v) => { setName(v); setNameError(""); }}
-          style={[globalStyles.input, nameError ? styles.inputError : null]}
+          onChangeText={(v) =>
+            setState((prevState) => ({ ...prevState, name: v, nameError: "" }))}
+          style={[globalStyles.input, { marginTop: 0, marginBottom: 10 }, nameError ? styles.inputError : null]}
           placeholder="Jean Dupont"
         />
         {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
@@ -132,8 +192,9 @@ export default function Contact() {
         </Text>
         <TextInput
           value={email}
-          onChangeText={(v) => { setEmail(v); setEmailError(""); }}
-          style={[globalStyles.input, emailError ? styles.inputError : null]}
+          onChangeText={(v) =>
+            setState((prevState) => ({ ...prevState, email: v, emailError: "" }))}
+          style={[globalStyles.input, { marginTop: 0, marginBottom: 10 }, emailError ? styles.inputError : null]}
           placeholder="jean@exemple.com"
           autoCapitalize="none"
           keyboardType="email-address"
@@ -147,8 +208,9 @@ export default function Contact() {
         </Text>
         <TextInput
           value={message}
-          onChangeText={(v) => { setMessage(v); setMessageError(""); }}
-          style={[globalStyles.input, styles.textArea, messageError ? styles.inputError : null]}
+          onChangeText={(v) =>
+            setState((prevState) => ({ ...prevState, message: v, messageError: "" }))}
+          style={[globalStyles.input, { marginTop: 0, marginBottom: 10 }, styles.textArea, messageError ? styles.inputError : null]}
           placeholder="Ton message..."
           multiline
           numberOfLines={4}
@@ -160,7 +222,7 @@ export default function Contact() {
       <TouchableOpacity
         style={[
           globalStyles.button,
-          { marginTop: 16, marginHorizontal: 60, marginBottom: 20 },
+          { marginTop: 16, marginBottom: 20, alignSelf: "center" },
           status === "sending" && { opacity: 0.6 },
         ]}
         onPress={handleSubmit}
