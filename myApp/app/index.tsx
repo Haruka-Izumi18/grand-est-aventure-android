@@ -1,5 +1,6 @@
-import { View, Text, ImageBackground,  StyleSheet } from "react-native";
+import { View, Text, ImageBackground, StyleSheet } from "react-native";
 import { globalStyles } from "@/styles/global";
+
 
 export default function AuthLanding() {
   return (

@@ -232,7 +232,7 @@ export default function SignIn() {
               Tu n&apos; pas encore ton compte?{"\n"} Inscris toi!
             </Text>
             <TouchableOpacity
-              style={[globalStyles.buttonWhite, { alignSelf: "center" }]}
+              style={[globalStyles.buttonWhite, { alignSelf: "center", marginTop: 20 }]}
               onPress={() => router.replace("/sign-up")}
             >
               <Text style={globalStyles.buttonTextGreen}>Inscription</Text>

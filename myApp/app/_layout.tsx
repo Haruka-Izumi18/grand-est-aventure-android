@@ -1,8 +1,28 @@
-import { NativeTabs } from "expo-router/unstable-native-tabs";
-import { authClient } from "@/lib/auth-client";
+import { useEffect } from 'react';
+import { NativeTabs } from 'expo-router/unstable-native-tabs';
+import { authClient } from '@/lib/auth-client';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+
+SplashScreen.preventAutoHideAsync();
 
 export default function TabLayout() {
   const { data: session } = authClient.useSession();
+
+  const [loaded, error] = useFonts({
+    SpaceMono_Regular: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    SpaceMono_Bold: require('../assets/fonts/SpaceMono-Bold.ttf'),
+    SpaceMono_Italic: require('../assets/fonts/SpaceMono-Italic.ttf'),
+    SpaceMono_BoldItalic: require('../assets/fonts/SpaceMono-BoldItalic.ttf'),
+  });
+
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) return null;
 
   return (
     <NativeTabs>
