@@ -39,7 +39,7 @@ export default function ListeAdventure() {
                     data={adventures}
                     keyExtractor={(item) => item.id}
                     contentContainerStyle={{ padding: 20, gap: 16 }}
-                    renderItem={({ item }) => <AdventureCard adventure={item} />}
+                    renderItem={({ item }) =><AdventureCard adventure={item} />}
                 />
             )}
         </View>
