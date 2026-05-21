@@ -55,10 +55,4 @@ async function api<T = any>(
     return { data, status: resp.status };
 }
 
-// Récupère la liste des aventures
-export async function getAdventures(): Promise<ApiResult> {
-    return api('api/game/adventures');
-}
-
 export { api };
-export default { api, getAdventures };
