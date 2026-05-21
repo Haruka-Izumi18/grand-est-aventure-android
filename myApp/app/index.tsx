@@ -2,10 +2,11 @@ import { View, Text, ImageBackground, StyleSheet, Pressable, ActivityIndicator, 
 import { globalStyles } from "@/styles/global";
 import AdventureCard, { Adventure } from '@/components/aventures/AdventureCard';
 import * as Location from 'expo-location';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback  } from 'react';
 import { WebView } from 'react-native-webview';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { api } from '@/services/api.service';
+import { useFocusEffect  } from 'expo-router';
 
 export default function AuthLanding() {
     // Référence vers la WebView pour pouvoir lui injecter du JS
@@ -22,6 +23,8 @@ export default function AuthLanding() {
 
     // Indique si l'utilisateur a cliqué sur une aventure (bloque le suivi auto)
     const [focusedAdventure, setFocusedAdventure] = useState(false);
+
+    // const router = useRouter();
 
     // -------------------------------------------------------
     // HTML de la carte Leaflet chargée dans la WebView
@@ -150,21 +153,22 @@ export default function AuthLanding() {
     // -------------------------------------------------------
     // Au montage : récupère les aventures + démarre la géoloc
     // -------------------------------------------------------
-    useEffect(() => {
+    useFocusEffect(
+    useCallback(() => {
         let subscription: Location.LocationSubscription | null = null;
 
         const init = async () => {
-            // Récupération des aventures depuis l'API
-            api('api/game/adventures')
+            const { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') return;
+
+            const location = await Location.getCurrentPositionAsync({});
+            const { latitude, longitude } = location.coords;
+
+            api(`api/game/adventures?latitude=${latitude}&longitude=${longitude}`)
                 .then((res) => setAdventures(res.data.adventures ?? []))
                 .catch((error) => console.error('Erreur API aventures:', error))
                 .finally(() => setLoading(false));
 
-            // Demande la permission de géolocalisation
-            const { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') return;
-
-            // Surveille la position en temps réel
             subscription = await Location.watchPositionAsync(
                 {
                     accuracy: Location.Accuracy.High,
@@ -173,11 +177,7 @@ export default function AuthLanding() {
                 },
                 (location) => {
                     const { latitude, longitude } = location.coords;
-
-                    // Met toujours à jour le point bleu
                     updateUserMarker(latitude, longitude);
-
-                    // Recentre la carte uniquement si pas focusé sur une aventure
                     if (!focusedAdventure) {
                         webViewRef.current?.injectJavaScript(`
                             window.map.setView([${latitude}, ${longitude}], 17);
@@ -190,11 +190,11 @@ export default function AuthLanding() {
 
         init();
 
-        // Nettoyage : arrête le watch quand le composant est démonté
         return () => {
             subscription?.remove();
         };
-    }, []);
+    }, [focusedAdventure])
+);
 
     // -------------------------------------------------------
     // Rendu
@@ -244,7 +244,12 @@ export default function AuthLanding() {
                     contentContainerStyle={{ padding: 20, gap: 16 }}
                     renderItem={({ item }) => (
                         <TouchableOpacity onPress={() => centerOnAdventure(item.latitude, item.longitude)}>
-                            <AdventureCard adventure={item} />
+                            <AdventureCard
+    adventure={item}
+    onPress={()=>{}}
+    // () => router.push({pathname: '/aventures/[id]',params: { id: item.id }})}
+    onMapPress={() => centerOnAdventure(item.latitude, item.longitude)}
+/>
                         </TouchableOpacity>
                     )}
                 />

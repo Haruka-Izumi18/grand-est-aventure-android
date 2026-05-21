@@ -1,6 +1,7 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { globalStyles } from '@/styles/global';
 import { FONT } from "@/styles/theme";
+import {formatDuration, formatDistance }  from "@/scripts/global-scripts";
 
 type City = {
     id: string;
@@ -23,19 +24,17 @@ export type Adventure = {
     updatedAt: string;
 };
 
-function formatDuration(seconds: number): string {
-    const h = Math.floor(seconds / 3600);
-    const min = Math.floor((seconds % 3600) / 60);
-    return h > 0 ? `${h}h ${min}min` : `${min}min`;
-}
-
 type AdventureCardProps = {
     adventure: Adventure;
+    onPress: () => void;
+    onMapPress?: () => void; // optionnel : affiché uniquement si fourni
 };
 
-export default function AdventureCard({ adventure }: AdventureCardProps) {
+export default function AdventureCard({ adventure, onPress, onMapPress }: AdventureCardProps) {
     return (
-        <View style={[globalStyles.card, { padding: 5 }]}> 
+        <View style={[globalStyles.card, { padding: 5 }]}>
+
+            {/* Image de couverture */}
             {adventure.coverImageUrl ? (
                 <Image
                     source={{ uri: adventure.coverImageUrl }}
@@ -44,21 +43,49 @@ export default function AdventureCard({ adventure }: AdventureCardProps) {
             ) : null}
 
             <View style={styles.info}>
-                <Text style={[globalStyles.titleh2, { fontFamily: FONT.bold }]}> 
+
+                {/* Nom de l'aventure */}
+                <Text style={[globalStyles.titleh2, { fontFamily: FONT.bold }]}>
                     {adventure.name}
                 </Text>
 
-                <Text style={[globalStyles.text, { fontFamily: FONT.bold }]}>📍  {adventure.city.name} ({adventure.city.postalCodes[0]})</Text>
+                {/* Infos */}
+                <Text style={[globalStyles.text, { fontFamily: FONT.bold }]}>
+                    📍 {adventure.city.name} ({adventure.city.postalCodes[0]})
+                </Text>
 
-                <Text style={[globalStyles.text, { fontFamily: FONT.bold }]}>⌚  Durée estimée : <Text style={globalStyles.text}>{formatDuration(adventure.estimatedDurationSeconds)}</Text></Text>
+                <Text style={[globalStyles.text, { fontFamily: FONT.bold }]}>
+                    ⌚ Durée estimée : <Text style={globalStyles.text}>{formatDuration(adventure.estimatedDurationSeconds)}</Text>
+                </Text>
 
-                <Text style={[globalStyles.text, { fontFamily: FONT.bold }]}>🧩  {adventure.enigmaCount} énigme{adventure.enigmaCount > 1 ? 's' : ''}</Text>
+                <Text style={[globalStyles.text, { fontFamily: FONT.bold }]}>
+                    🧩 {adventure.enigmaCount} énigme{adventure.enigmaCount > 1 ? 's' : ''}
+                </Text>
+                
+                <Text style={[globalStyles.text, { fontFamily: FONT.bold }]}>
+                    🚶 {formatDistance(adventure.distanceFromUserKm)} de vous
+                </Text>
 
-                <Text style={[globalStyles.text, { fontFamily: FONT.bold }]}>🚶  {adventure.distanceFromUserKm} km de vous</Text>
-
+                {/* Trésor */}
                 {adventure.hasTreasure && (
                     <Text style={styles.treasure}>🏆 Trésor à la clé !</Text>
                 )}
+
+                {/* Boutons */}
+                <View style={styles.buttons}>
+
+                    <TouchableOpacity style={styles.button} onPress={onPress}>
+                        <Text style={styles.buttonText}>Voir l&apos;aventure</Text>
+                    </TouchableOpacity>
+
+                    {/* Affiché uniquement si onMapPress est fourni */}
+                    {onMapPress && (
+                        <TouchableOpacity style={[styles.button, styles.buttonSecondary]} onPress={onMapPress}>
+                            <Text style={styles.buttonText}>Voir sur la carte</Text>
+                        </TouchableOpacity>
+                    )}
+
+                </View>
             </View>
         </View>
     );
@@ -72,13 +99,33 @@ const styles = StyleSheet.create({
     },
     info: {
         padding: 10,
-        gap: 2,
+        gap: 6,
     },
     treasure: {
         fontSize: 14,
         color: "#c8a000",
         fontWeight: "bold",
         marginTop: 4,
-        alignSelf: "center"
+        alignSelf: "center",
+    },
+    buttons: {
+        flexDirection: 'row',
+        gap: 8,
+        marginTop: 8,
+    },
+    button: {
+        flex: 1,
+        backgroundColor: '#2563eb',
+        padding: 10,
+        borderRadius: 8,
+        alignItems: 'center',
+    },
+    buttonSecondary: {
+        backgroundColor: '#64748b',
+    },
+    buttonText: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 13,
     },
 });
