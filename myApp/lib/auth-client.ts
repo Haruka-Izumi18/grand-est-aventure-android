@@ -15,6 +15,7 @@ export const authClient = createAuthClient({
       user: {
         city: { type: "string", required: false },
         email: { type: "string", required: false },
+        postalCode: { type: "string", required: false },
         adventureStepValidations: { type: "string", required: false },
         userBadges: { type: "string", required: false },
       },

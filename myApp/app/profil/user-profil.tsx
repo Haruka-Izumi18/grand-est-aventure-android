@@ -1,4 +1,4 @@
-import { View, Text, Button, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { globalStyles } from "@/styles/global";
 import { authClient } from "@/lib/auth-client";
 import { Redirect, useRouter } from "expo-router";
@@ -21,20 +21,17 @@ export default function Profil() {
   return (
     <View style={globalStyles.screen}>
       <View style={styles.header}>
-      {user?.name && (
-          <Text style={[globalStyles.secondTitre, {textAlign: "right"}]}>Bonjour {user.name}</Text>
-            )}
-   
-    <TouchableOpacity
-    onPress={() => setShowEdit(true)}
-      activeOpacity={0.7}>
-  <FontAwesome name="user-circle-o" size={24} color={COLORS.primary} />
-</TouchableOpacity>
-<EditProfil
-        visible={showEdit}
-        onClose={() => setShowEdit(false)}
-      />
- </View>
+        {user?.name && (
+          <Text style={[globalStyles.secondTitre, { textAlign: "right" }]}>
+            Bonjour {user.name}
+          </Text>
+        )}
+
+        <TouchableOpacity onPress={() => setShowEdit(true)} activeOpacity={0.7}>
+          <FontAwesome name="user-circle-o" size={30} color={COLORS.primary} />
+        </TouchableOpacity>
+        <EditProfil visible={showEdit} onClose={() => setShowEdit(false)} />
+      </View>
       <View style={globalStyles.card}>
         <Text style={globalStyles.titleGreen}>Histoire des aventures</Text>
         {user?.adventureStepValidations ? (
@@ -61,10 +58,10 @@ export default function Profil() {
   );
 }
 
-const styles = StyleSheet.create ({
-header: {
-  flexDirection: "row",
-  gap: 10,
-  justifyContent: "flex-end",
-}
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    gap: 10,
+    justifyContent: "flex-end",
+  },
 });
