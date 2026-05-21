@@ -40,6 +40,6 @@ export default function Badges({ badges }: { badges: any[] }) {
 }
 
 const styles = StyleSheet.create({
-  grid: { flexDirection: "row", flexWrap: "wrap", gap: 5 },
+  grid: { flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly" },
   image: { width: 72, height: 72, resizeMode: "contain" },
 });
